@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Lecture 01</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Bruno Conte" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer-bse.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+&lt;!-- class: inverse, center, title-slide, middle --&gt;
+class: center, middle
+
+&lt;style&gt;
+.title-slide .remark-slide-number {
+  display: none;
+}
+&lt;/style&gt;
+
+# Lecture 01: Geospatial Data Sciences
+
+# and Economic Spatial Models
+
+## &lt;img src="figs/bse_primary_logo.png" style="width: 35%" /&gt;&lt;br&gt;&lt;br&gt;Bruno Conte
+
+## 08/Jan/2024
+
+---
+
+# Geospatial data and Spatial Models: this course
+
+- Introduce students to conceptual and practical aspects of &lt;span style="color: rgb(0,130,155)"&gt;spatial data&lt;/span&gt;&lt;/br&gt;
+    - What is spatial (geographical) data?
+    - How is it used in &lt;span style="color: rgb(0,130,155)"&gt;research in economics&lt;/span&gt; or business applications?
+    - Which tools (i.e. computer systems/languages) do we need to work with it?
+    
+- Main goal: &lt;span style="color: rgb(177,148,40)"&gt;**concepts + tools**&lt;/span&gt; = practice with real-world data
+    - Concepts: types and formats of spatial data + &lt;span style="color: rgb(0,130,155)"&gt;economic spatial models&lt;/span&gt;
+    - Tools: programming in ``R`` and ``RStudio``
+    
+- Course's **main philosophy**: a course by an &lt;span style="color: rgb(174,77,41)"&gt;economist working with spatial data&lt;/span&gt;
+    - Rather than a course by a spatial data's specialist!
+    
+---
+
+# Geospatial data and Spatial Models: this course
+
+This course is about how to use spatial data to empirically answer &lt;span style="color: rgb(174,77,41)"&gt;research questions of our interest&lt;/span&gt;.
+
+.pull-left[
+**You will learn**
+- What is spatial data and its applications in economic research
+
+- Basic `R` programming
+
+- Most common spatial data operations
+
+- Introductory (spatial) data visualization
+]
+
+.pull-right[
+**You will not learn**
+- All state-of-art tools available in `R`
+
+- To write an efficient `R` code&lt;sup&gt;*&lt;/sup&gt;
+
+- To handle big data&lt;sup&gt;*&lt;/sup&gt;
+
+- To solve every possible data problem
+]
+
+.footnote[
+[*] This is up to you.
+]
+
+---
+
+# Geospatial data and Spatial Models: this course
+
+## References
+
+1. Donaldson, D. and Storeygard, A., 2016. The view from above: Applications of satellite data in economics. *Journal of Economic Perspectives*, *30(4)*, pp.171-98.
+
+2. Lovelace, R., Nowosad, J. and Muenchow, J., 2019. **Geocomputation with R**. Chapman and Hall/CRC.
+
+3. Pebesma, E., 2018. Simple Features for R: Standardized Support for Spatial Vector Data. The R Journal 10 (1), 439-446, https://doi.org/10.32614/RJ-2018-009
+
+4. Wickham, H. and Grolemund, G., 2016. R for data science: import, tidy, transform, visualize, and model data. " O'Reilly Media, Inc.".
+
+---
+
+# Geospatial data and Spatial Models: schedule
+
+1. Introduction to (spatial) data and programming in `R` &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; [08.Jan.2024]
+    - Introduction to spatial data and examples in economics
+    - Basic `R` programming: set up and practice
+
+2. Week 2-4: Vector spatial data &lt;span style="color: rgb(0,130,155)"&gt;+ assignment&lt;/span&gt; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; [15-29.Jan.2024]
+
+3. Week 5-7: Raster spatial data + (basic) interactive tools &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; [05-19.Feb.2024]
+
+4. Week 8-10: Spatial models and applications with data &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; [26.Feb-11.Mar.2024]&lt;br&gt; &lt;br&gt;
+
+5. &lt;span style="color: rgb(177,148,40)"&gt;Take-home exam&lt;/span&gt; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; [??.Apr.2024]
+
+---
+
+# Geospatial data and Spatial Models: evaluation
+
+1. Class participation (10%)
+
+2. Practical assignments (3 x 10%, in teams)
+
+3. &lt;span style="color: rgb(0,130,155)"&gt;Take-home exam&lt;/span&gt; (60%, `pdf` by email):
+  - Research idea: spatial data + problem = **research question**
+  
+  - Replication of tasks: data + tools = empirical motivation
+
+- Any &lt;span style="color: rgb(174,77,41)"&gt;questions&lt;/span&gt;?
+
+---
+
+# Spatial data in economics: logistics
+
+- Classes: every Mon/Thu from 08(:15)-11:00 am
+    - 1 hour theory + 15' break + 1 hour practice (hands-in)
+
+- Course material: &lt;u&gt;[webpage](https://brunoconteleite.github.io/02-gis-unibo/)&lt;/u&gt;
+
+- Office hours: Thu from 11:00 am (write me an email!)
+    
+- Potentially mixed backgroud: **be patient**!
+
+## Hands-in sessions:
+
+- Your own computer + `RStudio`:
+  - We will set it up together!
+
+- Any &lt;span style="color: rgb(174,77,41)"&gt;questions&lt;/span&gt;?
+
+---
+class: inverse, center, middle
+count: false
+
+# Getting started: what is Spatial Data?
+
+---
+background-image: url(https://www.edmaps.com/europe_1789_excelsior_d.jpg)
+background-size: cover
+class: center, bottom, inverse
+# Europe in 1789 (before the French Revolution)
+
+---
+background-image: url(https://www.edmaps.com/europe_1812_excelsior_d.jpg)
+background-size: cover
+class: center, bottom, inverse
+# Europe in 1812 (before the French Invasion of Russia)
+
+---
+background-image: url(https://www.edmaps.com/europe_1815_excelsior_d.jpg)
+background-size: cover
+class: center, bottom, inverse
+# Europe in 1815 (after the Congress of Vienna)
+
+---
+background-image: url(https://hsat.space/wp-content/uploads/2020/08/brazil_planet_-6.35-53.55-768x512-1.jpg)
+background-size: cover
+class: center, bottom, inverse
+# Satellite picture of fires (and deforestation) in the Brazilian Amazon
+
+???
+Source: https://hsat.space/satellites-deforestation/
+
+---
+background-image: url(https://maaproject.org/wp-content/uploads/2021/01/maaproject.org-maap-132-amazon-deforestation-hotspots-2020-HS2-PFL-Amz-Biog2020-GLAD-Confirm-2-5-10-v3-Eng.jpg)
+background-size: contain
+class: center, top, inverse
+# Deforestation in the Brazilian Amazon
+
+???
+Source: https://maaproject.org/2021/amazon-hotspots-2020/
+
+---
+background-image: url(https://www.researchgate.net/publication/343842128/figure/fig1/AS:928229292511232@1598318517654/A-comparison-of-the-inter-and-intra-urban-variability-of-slums-Image-a-shows-a-typical.ppm)
+background-size: contain
+class: center, bottom, inverse
+# Urban slums in India
+
+???
+Source: https://www.researchgate.net/figure/A-comparison-of-the-inter-and-intra-urban-variability-of-slums-Image-a-shows-a-typical_fig1_343842128
+
+---
+
+# What is Spatial Data?
+
+- Data/information that has a &lt;span style="color: rgb(174,77,41)"&gt;geographical attribute&lt;/span&gt;
+  - **Much more** than coordinates on a standard dataset
+  
+  - Polygons, areas, distances, height, overlaying, intersections, ...
+
+--
+
+.pull-left[
+- Common aspect: **&lt;span style="color: rgb(177,148,40)"&gt;unstructured data&lt;/span&gt;** (i.e. unconventional data format)
+
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;img src="https://previews.123rf.com/images/in8finity/in8finity1506/in8finity150600031/41436580-earth-globe-icons-set-.jpg" style="width: 40%" /&gt;
+]
+
+.pull-right[
+- Our goal: manipulate it into the **&lt;span style="color: rgb(0,130,155)"&gt;structure&lt;/span&gt;** required by research
+
+&lt;img src="https://cdn-icons-png.flaticon.com/512/6925/6925245.png" style="width: 40%" /&gt; &lt;img src="https://cdn-icons-png.flaticon.com/512/5198/5198977.png" style="width: 40%" /&gt;
+
+]
+
+---
+
+# What is GIS?
+
+- GIS = &lt;span style="color: rgb(0,130,155)"&gt;Geographic Information Systems&lt;/span&gt;
+    - (old) Systems used to manipulate/process spatial data (**1980's**)
+    
+    - 1990's: rise of user-friendly, **desktop softwares** (ArcGIS, QGIS)
+    
+    - &lt;span style="color: rgb(174,77,41)"&gt;Data Science revolution:&lt;/span&gt;  full integration of GIS tools into data-processing pipelines; i.e. computer routines that process (potentially spatial) data in &lt;span style="color: rgb(177,148,40)"&gt;modern languages&lt;/span&gt; (e.g. `R`)
+    
+- **Examples:**
+    - Firm processing purchases across branches
+      - Is revenue larger in branches *closer to public transportation?*
+      
+    - HR firm allocating seasonal workers across plants
+      - Choose workers based on residence (reduce commuting time)?
+
+---
+
+# Why not GIS in desktop, user-friendly, softwares?
+
+Require human interaction (e.g. clicking, moving files) to &lt;span style="color: rgb(0,130,155)"&gt;structure spatial data&lt;/span&gt;.
+
+.pull-left[
+.center[**GIS in 1980's:**
+
+&lt;img src="https://upload.wikimedia.org/wikipedia/commons/4/42/SYMAP_-_LAB-LOG_1980.png" style="width: 80%" /&gt;
+]
+]
+
+.pull-right[
+.center[**ArcGIS/QGIS:**]
+
+&lt;img src="https://i.imgur.com/nuSANEH.jpg" style="width: 120%" /&gt;
+]
+
+---
+class: inverse, center, middle
+count: false
+
+# How is Spatial Data used in Economics?
+
+---
+
+# Spatial Data in Economics
+
+- **Motivation:** research questions that requires structuring spatial data.
+  - Spatial data = unstructured
+  
+  - GIS tools: manipulating spatial data to the required structure
+  
+- &lt;span style="color: rgb(174,77,41)"&gt;Applications in economic research:&lt;/span&gt;
+  - Cholera in London (Snow, 1856)
+  
+  - Colonial institutions and development in Peru (Dell, 2010)
+  
+  - Railroads and welfare in India (Donaldson, 2018)
+  
+  - Climate change and urbanization in Africa (Henderson et al., 2017)
+  
+  - Business analytics for asset-exposure to climate risks
+
+---
+
+# Application 01: John Snow's Cholera Maps in Soho (London)
+
+
+.pull-left[
+.center[
+&lt;img src="https://www.researchgate.net/profile/Maaruf-Lawal/publication/333521032/figure/fig1/AS:764738510278658@1559339277494/John-Snow-map-of-cholera-death-in-London-Gilbert-EW-1958-There-are-three-important.png" style="width: 90%" /&gt;
+]
+]
+
+.pull-right[
+- **Cholera outbreak** in mid 19th century
+
+- Former theory: transmission by air
+
+- John Snow's hypothesis: &lt;span style="color: rgb(0,130,155)"&gt;germ-contaminated water&lt;/span&gt;
+  - Different rates between locations with different water suppliers
+  
+  - Higher rates for those &lt;span style="color: rgb(174,77,41)"&gt;supplied by (polluted) Thames River&lt;/span&gt;
+  
+- Snow's finding: revolution on public sanitation
+
+]
+
+---
+
+# Application 02: Long-term consequences of the Mita (colonial) system in Peru
+
+
+.pull-left[
+.center[
+&lt;img src="figs/mita01.png" style="width: 100%" /&gt;
+]
+]
+
+.pull-right[
+- Spanish empire required **forced labor** to work on silver mines (Potosí)
+
+- Workers from high lands (Mita regions): resistent to the harsh mine conditions
+
+- Mita boundaries: regions that &lt;span style="color: rgb(174,77,41)"&gt;provided more/less conscripts&lt;/span&gt; (discontinuously!)
+  
+- **Dell's findings:** long-lasting &lt;span style="color: rgb(177,148,40)"&gt;development differences&lt;/span&gt;
+  - &lt;span style="color: rgb(0,130,155)"&gt;Economic channels:&lt;/span&gt; land ownership inequality, less public services, ...
+
+]
+
+---
+count: false
+
+# Application 02: Long-term consequences of the Mita (colonial) system in Peru
+
+
+.pull-left[
+.center[
+&lt;img src="figs/mita02.png" style="width: 80%" /&gt;
+]
+]
+
+.pull-right[
+- Spanish empire required **forced labor** to work on silver mines (Potosí)
+
+- Workers from high lands (Mita regions): resistent to the harsh mine conditions
+
+- Mita boundaries: regions that &lt;span style="color: rgb(174,77,41)"&gt;provided more/less conscripts&lt;/span&gt; (discontinuously!)
+  
+- **Dell's findings:** long-lasting &lt;span style="color: rgb(177,148,40)"&gt;development differences&lt;/span&gt;
+  - &lt;span style="color: rgb(0,130,155)"&gt;Economic channels:&lt;/span&gt; land ownership inequality, less public services, ...
+
+]
+
+---
+
+# Application 03: Transportation integration and welfare in India
+
+
+.pull-left[
+.center[
+&lt;img src="figs/donaldson.png" style="width: 100%" /&gt;
+]
+]
+
+.pull-right[
+- Vast **expansion of railroad network** in British colonial India
+
+- Standard trade theory: &lt;span style="color: rgb(0,130,155)"&gt;welfare gains from market integration&lt;/span&gt;
+  - Lack of evidence within countries
+
+- **Donaldson's findings:** improved trade conditions increased welfare
+  - &lt;span style="color: rgb(177,148,40)"&gt;Integrated remote areas&lt;/span&gt; (reduced price gaps, more trade flows)
+  
+  - &lt;span style="color: rgb(174,77,41)"&gt;Welfare gains&lt;/span&gt; (real income) from intraregional trade
+
+ 
+
+]
+
+---
+
+# Application 04: Climate change and urbanization in Africa
+
+
+.pull-left[
+.center[
+&lt;img src="figs/henderson01.png" style="width: 100%" /&gt;
+]
+]
+
+.pull-right[
+- **Increased dryness in Africa** (worse conditions for agriculture)
+
+- Question: do agents in affected rural regions &lt;span style="color: rgb(0,130,155)"&gt;migrate to cities?&lt;/span&gt;
+
+- **Henderson et al.'s findings:** depends on &lt;span style="color: rgb(174,77,41)"&gt;industry composition of cities&lt;/span&gt;
+  - Increased size (**nightlights**) in manufacturing, exporting cities
+  
+  - Opposite evidence for market towns (service providers to agriculture)
+  
+  - Importance of &lt;span style="color: rgb(177,148,40)"&gt;structural change!&lt;/span&gt;
+]
+
+
+---
+count: false
+
+# Application 04: Climate change and urbanization in Africa
+
+
+.pull-left[
+.center[
+&lt;img src="figs/henderson02.png" style="width: 100%" /&gt;
+]
+]
+
+.pull-right[
+- **Increased dryness in Africa** (worse conditions for agriculture)
+
+- Question: do agents in affected rural regions &lt;span style="color: rgb(0,130,155)"&gt;migrate to cities?&lt;/span&gt;
+
+- **Henderson et al.'s findings:** depends on &lt;span style="color: rgb(174,77,41)"&gt;industry composition of cities&lt;/span&gt;
+  - Increased size (**nightlights**) in manufacturing, exporting cities
+  
+  - Opposite evidence for market towns (service providers to agriculture)
+  
+  - Importance of &lt;span style="color: rgb(177,148,40)"&gt;structural change!&lt;/span&gt;
+
+]
+
+---
+count: false
+
+# Application 04: Climate change and urbanization in Africa
+
+
+.pull-left[
+.center[
+&lt;img src="figs/henderson03.png" style="width: 100%" /&gt;
+]
+]
+
+.pull-right[
+- **Increased dryness in Africa** (worse conditions for agriculture)
+
+- Question: do agents in affected rural regions &lt;span style="color: rgb(0,130,155)"&gt;migrate to cities?&lt;/span&gt;
+
+- **Henderson et al.'s findings:** depends on &lt;span style="color: rgb(174,77,41)"&gt;industry composition of cities&lt;/span&gt;
+  - Increased size (**nightlights**) in manufacturing, exporting cities
+  
+  - Opposite evidence for market towns (service providers to agriculture)
+  
+  - Importance of &lt;span style="color: rgb(177,148,40)"&gt;structural change!&lt;/span&gt;
+
+]
+
+---
+
+# Application 05: Business analytics for ESG risk
+
+
+.pull-left[
+.center[
+&lt;img src="figs/prometeia1.png" style="border: 2px solid  gray; width: 90%" /&gt;
+]
+]
+
+.pull-right[
+- **ESG =** Environment, Social, and Government- related risks
+
+- Question: how to assess &lt;span style="color: rgb(0,130,155)"&gt;asset exposure&lt;/span&gt; to ESG-related risks?
+
+- **Business product:** Management tool for &lt;span style="color: rgb(174,77,41)"&gt;climate risks&lt;/span&gt; and advanced analytics
+  - Balance sheet data (assets) + macro model (transition scenarios)
+  
+  - Asset exposure: location + &lt;span style="color: rgb(177,148,40)"&gt;**climate risk data**&lt;/span&gt;
+
+]
+
+---
+count: false
+
+# Application 05: Business analytics for ESG risk
+
+
+.pull-left[
+.center[
+&lt;img src="figs/prometeia2.png" style="border: 2px solid  gray; width: 80%" /&gt;
+]
+]
+
+.pull-right[
+- **ESG =** Environment, Social, and Government- related risks
+
+- Question: how to assess &lt;span style="color: rgb(0,130,155)"&gt;asset exposure&lt;/span&gt; to ESG-related risks?
+
+- **Business product:** Management tool for &lt;span style="color: rgb(174,77,41)"&gt;climate risks&lt;/span&gt; and advanced analytics
+  - Balance sheet data (assets) + macro model (transition scenarios)
+  
+  - Asset exposure: location + &lt;span style="color: rgb(177,148,40)"&gt;**climate risk data**&lt;/span&gt;
+
+]
+
+---
+count: false
+
+# Application 05: Business analytics for ESG risk
+
+
+.pull-left[
+.center[
+&lt;img src="figs/prometeia3.png" style="border: 2px solid  gray; width: 80%" /&gt;
+]
+]
+
+.pull-right[
+- **ESG =** Environment, Social, and Government- related risks
+
+- Question: how to assess &lt;span style="color: rgb(0,130,155)"&gt;asset exposure&lt;/span&gt; to ESG-related risks?
+
+- **Business product:** Management tool for &lt;span style="color: rgb(174,77,41)"&gt;climate risks&lt;/span&gt; and advanced analytics
+  - Balance sheet data (assets) + macro model (transition scenarios)
+  
+  - Asset exposure: location + &lt;span style="color: rgb(177,148,40)"&gt;**climate risk data**&lt;/span&gt;
+
+]
+
+---
+class: inverse, center, middle
+count: false
+
+# How to work with spatial data in R?
+
+---
+
+# Working with data (including spatial) in R
+
+- What is `R`? 
+  - Computer language for statistical computing and graphics
+  
+  - Open source, &lt;span style="color: rgb(0,130,155)"&gt;free access&lt;/span&gt;
+  
+  - Developers' community (CRAN)
+      - Development of **libraries** (packages) for &lt;span style="color: rgb(174,77,41)"&gt;specific applications&lt;/span&gt;
+    
+- `RStudio`: integrated development environment (IDE)
+  - &lt;span style="color: rgb(177,148,40)"&gt;User-friendlier environment&lt;/span&gt; to work with `R`
+  
+---
+
+# Working with data (including spatial) in R
+
+- Data work in `R`: one of its &lt;span style="color: rgb(0,130,155)"&gt;many capabilities&lt;/span&gt;
+  - Producing documents, slides, or webpages
+  
+- **Our approach:**
+  1. &lt;span style="color: rgb(0,130,155)"&gt;Basic programming and data work&lt;/span&gt; in `R` `\(\rightarrow\)` **content of today!**
+  
+  2. Working with spatial data in `R` (GIS tools)
+  
+- Important: &lt;span style="color: rgb(174,77,41)"&gt;focus on basics&lt;/span&gt;
+  - Introduction of basic concepts/tools rather than a presentation of **all possible** functions
+  
+  - Every spatial data application is a challenge on its own
+      - The goal is to introduce the basics so that you can apply (and improve) them on &lt;span style="color: rgb(177,148,40)"&gt;your own application!&lt;/span&gt;
+
+---
+class: inverse, center, middle
+count: false
+
+# R Basics
+
+---
+
+# Basics of programming and data work in R
+
+Open `01_class01.R` on your own computer, where we will cover the following topics. The subsequent slides here are for &lt;span style="color: rgb(0,130,155)"&gt;reference only&lt;/span&gt;.
+
+.pull-left[
+- **Concepts covered:**
+  1. `R` basics: environment, main elements (vectors, lists, `data.frame`), libraries
+  
+  2. Basic &lt;span style="color: rgb(174,77,41)"&gt;data wrangling&lt;/span&gt; with ``dplyr``
+      - Filtering, mutating, merging
+  
+  3. &lt;span style="color: rgb(0,130,155)"&gt;Data visualization&lt;/span&gt; with `ggplot2`
+]
+
+.pull-right[
+- **Setting up `R` (or in `RStudio`)**:
+
+```r
+# # Install packages (only first time)
+*# install.packages('data.table')
+*# install.packages('tidyverse')
+
+# Load them:
+library(data.table)
+library(dplyr)
+```
+Note: warning messages are OK!
+
+]
+
+---
+
+# Basics of programming and data work in R (1/3)
+
+- `R` is versatile working environment
+  - Can handle **different** elements (e.g. datasets, images, texts) contempotaneously
+  
+- Setting the **local** environment: working directory
+
+
+```r
+getwd() # tells you the current wd
+```
+
+```
+## [1] "/Users/brunoconteleite/Dropbox/Teaching/08-geospatial-ds-bse"
+```
+
+- Types of elements in `R` environment:
+  - Vectors, `data.frame()`, `list()`, among (many) others
+  
+  - To check (or clean) current environment: `ls()` (or `rm()`)
+
+---
+
+# Basics of programming and data work in R (2/3)
+
+- **Data wrangling:** manipulating raw data with `dplyr`
+  - Creating new variables, filtering datasets, arranging, merging, reshaping
+  
+- &lt;span style="color: rgb(0,130,155)"&gt;Pipe syntax:&lt;/span&gt; uses `%&gt;%` operator. Example if merging datasets:
+
+```r
+df &lt;- merge.data.table(a,b,by = 'Month') # is equivalent to:
+df &lt;- a %&gt;% 
+  left_join(b,by = 'Month')
+```
+
+- Same reasoning with many other `dplyr` data-wrangling functions; e.g. `mutate()`, `filter()`, `select()`, `summarise()`, `arrange()`
+
+- Check wiki &lt;u&gt;[here](https://dplyr.tidyverse.org/)&lt;/u&gt;
+
+---
+
+# Basics of programming and data work in R (3/3)
+
+- **Data visualization** in `R` with `ggplot()`. Syntax that maps &lt;span style="color: rgb(0,130,155)"&gt;data&lt;/span&gt; `\(\rightarrow\)` &lt;span style="color: rgb(174,77,41)"&gt;geometry&lt;/span&gt; `\(\rightarrow\)` &lt;span style="color: rgb(177,148,40)"&gt;visuals&lt;/span&gt;
+
+
+.pull-left[
+
+```r
+library(ggplot2)
+try( # ignore this
+p &lt;- ggplot(data = data) +
+  geom_GEOM(mapping = aes(MAPPINGS)) +
+  THEME()
+)
+# Example
+p &lt;- ggplot(data = airquality) +
+  geom_point(mapping = aes(Wind,Temp, color = Month)) +
+  theme_bw()
+```
+- Check wiki &lt;u&gt;[here](https://ggplot2.tidyverse.org/)&lt;/u&gt;
+]
+
+.pull-right[
+.center[
+&lt;img src="00_class01_files/figure-html/unnamed-chunk-5-1.png" width="75%" /&gt;
+]
+]
+
+---
+
+# Hands-in: your turn! (1/2)
+
+.pull-left[
+- Distribution (histogram) of CO2 uptake across plants in US/Canada
+
+- Distinguish plants by state (Quebec/Mississipi)
+
+- Extra: play with different `theme()` parameters of `ggplot()`
+
+- Use the `datasets::CO2` data!
+
+]
+
+.pull-right[
+![](00_class01_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
+
+]
+
+---
+
+# Hands-in: your turn! (2/2)
+
+.pull-left[
+- Icome vs. Murder rates across US states (scatter plot). Use `state.x77` dataset
+
+- Distinguish between high/low density states
+  - High density = (Population/Area) &gt; median: use `mutate()`
+
+- Extra: additional geom layer with non-linear relationship? Use `geom_smooth()`
+
+- Can you remove outliers (i.e. states with Income higher than 6,000)? Use `filter()`
+
+]
+
+.pull-right[
+![](00_class01_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+
+]
+
+---
+count: false
+
+# Hands-in: your turn! (2/2)
+
+.pull-left[
+- Icome vs. Murder rates across US states (scatter plot). Use `state.x77` dataset
+
+- Distinguish between high/low density states
+  - High density = (Population/Area) &gt; median: use `mutate()`
+
+- Extra: additional geom layer with non-linear relationship? Use `geom_smooth()`
+
+- Can you remove outliers (i.e. states with Income higher than 6,000)? Use `filter()`
+
+]
+
+.pull-right[
+![](00_class01_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+
+]
+
+---
+count: false
+
+# Hands-in: your turn! (2/2)
+
+.pull-left[
+- Icome vs. Murder rates across US states (scatter plot). Use `state.x77` dataset
+
+- Distinguish between high/low density states
+  - High density = (Population/Area) &gt; median: use `mutate()`
+
+- Extra: additional geom layer with non-linear relationship? Use `geom_smooth()`
+
+- Can you remove outliers (i.e. states with Income higher than 6,000)? Use `filter()`
+
+]
+
+.pull-right[
+![](00_class01_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+
+]
+
+---
+
+# References
+
+- Dell, M., 2010. The persistent effects of Peru's mining mita. *Econometrica*, *78(6)*, pp.1863-1903.
+
+- Donaldson, D., 2018. Railroads of the Raj: Estimating the impact of transportation infrastructure. *American Economic Review*, *108(4-5)*, pp.899-934.
+
+- Henderson, J.V., Storeygard, A. and Deichmann, U., 2017. Has climate change driven urbanization in Africa?. *Journal of development economics*, *124*, pp.60-82.
+
+- Snow, J., 1856. On the mode of communication of cholera. *Edinburgh medical journal*, *1(7)*, p.668.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

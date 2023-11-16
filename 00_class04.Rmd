@@ -1,0 +1,447 @@
+---
+title: "Lecture 04"
+subtitle: "Theory and Tools (a.k.a. GIS Tools Lab.)"
+author: "Bruno Conte"
+institute: "Università di Bologna"
+date: "28/Sep/2023"
+# date: "2016/12/12 (updated: `r Sys.Date()`)"
+# bibliography: references.bib
+output:
+  xaringan::moon_reader:
+    css: xaringan-themer.css
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: '16:9'
+    seal: false
+    
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+
+# library(xaringanthemer)
+# # style_mono_accent(
+# #   base_color = "#1c5253"
+# #   # header_font_google = google_font("Josefin Sans"),
+# #   # text_font_google   = google_font("Montserrat", "300", "300i"),
+# #   # code_font_google   = google_font("Fira Mono")
+# # )
+# # style_xaringan(link_color = 'red')
+# style_xaringan(
+#   text_font_family = "Droid Serif",
+#   text_font_url = "https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic",
+#   header_font_google = google_font("Yanone Kaffeesatz")
+# )
+# other colors:
+# blue: rgb(0,114,178)
+# orange: rgb(213,94,0)
+# green: rgb(0,158,115)
+```
+
+class: inverse, center, title-slide, middle
+
+<style>
+.title-slide .remark-slide-number {
+  display: none;
+}
+</style>
+
+# Lecture 04: Spatial Data
+
+## Theory and Tools (a.k.a. GIS Tools Lab.)
+
+### <img src="figs/unibo_logo_white.png" style="width: 15%" /><br><br>Bruno Conte
+
+### 28/Sep/2023
+
+---
+
+# Spatial data in economics: schedule
+
+1. ~~Introduction to (spatial) data and programming in `R`~~ [18.Sep.2023]
+
+2. ~~Spatial data basics: vector data <span style="color: rgb(0,114,178)">+ assignment</span>~~ [21.Sep.2023]
+
+3. ~~Basic operations with vector data <span style="color: rgb(0,114,178)">+ assignment</span>~~ [25.Sep.2023]
+
+4. Geometry operations and miscelanea <span style="color: rgb(213,94,0)">+ follow-up</span> <span style="color: rgb(0,114,178)">+ assignment</span> [28.Sep.2023]
+    - Follow-up: double-check course's pace and missing concepts
+    - Unary geometry operations: simplifying, centroids, buffers, etc
+    - Binary geometry operations: clipping, unions, etc.
+
+5. Raster data and operations <span style="color: rgb(0,114,178)">+ assignment</span> [02.Oct.2023]<br> <br>
+
+6. <span style="color: rgb(0,158,115)">Take-home exam</span> [03.Nov.2023]
+
+---
+
+# Main references for this class
+
+1. Lovelace, R., Nowosad, J. and Muenchow, J., 2019. <span style="color: rgb(0,114,178)">**Geocomputation with R.**</span> Chapman and Hall/CRC.
+  - Chapter 5 (spatial geometry operations)
+
+2. Pebesma, E., 2018. Simple Features for R: Standardized Support for Spatial Vector Data. The R Journal 10 (1), 439-446
+
+3. Wickham, H. and Grolemund, G., 2016. R for data science: import, tidy, transform, visualize, and model data. " O'Reilly Media, Inc.".
+
+---
+
+# Follow-up: any feedback/issues?
+
+- <span style="color: rgb(0,114,178)">Course pace</span>, contents, (lack of) complexity?
+
+- Timetable, assignments, examination/grading?
+
+- <span style="color: rgb(0,114,178)">Course format</span> (exposition + practice)?
+
+- The instructor? ;)
+
+- <span style="color: rgb(0,114,178)">Anything else</span> (email if not comfortable)?
+
+---
+
+# Geometry operations
+
+- <span style="color: rgb(0,114,178)">Geometry operations:</span> manipulation of vector data that uses/<span style="color: rgb(213,94,0)">manipulate its geometry</span>. Operations can be both:
+  - **Unary:** geometry operations that require (and manipulate) a single feature
+      1. Simplification
+      2. Centroids
+      3. Buffers
+      4. Casting
+  
+  - **Binary:** operations that interact two features (e.g. distance)
+      1. Clipping/subsetting
+      2. Distances
+
+---
+
+# Unary geometry operations: simplify
+
+.pull-left[
+.center[
+**Raw geometry:**
+```{r, warning=FALSE, message=F,echo=F}
+options(width = 70)
+library(sf)
+library(tidyverse)
+library(spData)
+plot(st_geometry(seine))
+```
+]
+]
+.pull.right[
+.center[
+**Simplified geometry:**
+```{r, warning=FALSE, message=F,echo=F}
+options(width = 70)
+library(sf)
+library(tidyverse)
+library(spData)
+plot(st_geometry(st_simplify(seine, dTolerance = 2000)))
+```
+]
+]
+
+It reduces number of vertices. It can be very **CPU intense** (watch out!). Simplifying complex polygons: chapter 5.2.1.
+
+---
+
+# Unary geometry operations: centroids
+
+Assigns the <span style="color: rgb(0,114,178)">center of mass</span> (**a point**) of a geometry (line or polygon). For disjoint centroids: use `st_point_on_surface()`!
+
+.pull-left[
+```{r, warning=FALSE, message=F,echo=c(4:7), fig.show='hide'}
+library(sf)
+library(tidyverse)
+library(spData)
+sf.us <- us_states
+sf.cent <- st_centroid(sf.us)#<<
+ggplot() +
+  geom_sf(data = sf.us) +
+  geom_sf(data = sf.cent, shape = 3)
+```
+]
+
+.pull-right[
+```{r, results='hide', message=FALSE, echo=FALSE,warning=FALSE, out.width="100%"}
+library(sf)
+library(tidyverse)
+library(spData)
+sf.us <- us_states
+sf.cent <- st_centroid(sf.us)
+p<-ggplot() +
+  geom_sf(data = sf.us) +
+  geom_sf(data = sf.cent,
+          shape = 2,
+          color = 'red'
+          )
+p
+```
+]
+
+---
+
+# Unary geometry operations: centroids
+
+Assigns the <span style="color: rgb(0,114,178)">center of mass</span> (**a point**) of a geometry (line or polygon). For disjoint centroids: use `st_point_on_surface()`!
+
+.pull-left[
+```{r, warning=FALSE, message=F,echo=c(4:7), fig.show='hide'}
+library(sf)
+library(tidyverse)
+library(spData)
+sf.river <- seine
+sf.cent <- st_centroid(sf.river) #<<
+ggplot() +
+  geom_sf(data = sf.river) +
+  geom_sf(data = sf.cent,
+          shape = 16,
+          color = 'red'
+          )
+```
+]
+
+.pull-right[
+```{r, results='hide', message=FALSE, echo=FALSE,warning=FALSE, out.width="80%"}
+library(sf)
+library(tidyverse)
+library(spData)
+sf.river <- seine
+sf.cent <- st_centroid(sf.river)
+ggplot() + geom_sf(data = sf.river) + geom_sf(data = sf.cent, shape = 16, color = 'red',size=3)
+```
+]
+
+---
+
+# Unary geometry operations: centroids
+
+Assigns the <span style="color: rgb(0,114,178)">center of mass</span> (**a point**) of a geometry (line or polygon). For disjoint centroids: use `st_point_on_surface()`!
+
+.pull-left[
+```{r, warning=FALSE, message=F,echo=c(4:7), fig.show='hide'}
+library(sf)
+library(tidyverse)
+library(spData)
+sf.river <- seine
+sf.cent <- st_point_on_surface(sf.river) #<<
+ggplot() +
+  geom_sf(data = sf.river) +
+  geom_sf(data = sf.cent,
+          shape = 16,
+          color = 'red'
+          )
+```
+]
+
+.pull-right[
+```{r, results='hide', message=FALSE, echo=FALSE,warning=FALSE, out.width="80%"}
+library(sf)
+library(tidyverse)
+library(spData)
+sf.river <- seine
+sf.cent <- st_point_on_surface(sf.river)
+ggplot() + geom_sf(data = sf.river) + geom_sf(data = sf.cent, shape = 16, color = 'red',size=3)
+```
+]
+
+---
+
+# Unary geometry operations: buffers
+
+.pull-left[
+- **Buffer zone:** area around a feature containing locations/space <span style="color: rgb(0,114,178)">within a certain distance</span>.
+```{r, warning=FALSE, message=F,echo=c(4:7), fig.show='hide'}
+library(sf)
+library(tidyverse)
+library(spData)
+sf.river <- seine
+sf.buff <- st_buffer(sf.river, #<<
+                     dist = 5000 #<<
+                     ) #<<
+ggplot() + 
+  geom_sf(data = sf.river) + 
+  geom_sf(data = sf.buff, 
+          fill = 'red',
+          alpha=.5
+          )
+```
+
+]
+.pull.right[
+```{r, results='hide', message=FALSE, echo=FALSE,warning=FALSE, out.width="50%"}
+library(sf)
+library(tidyverse)
+library(spData)
+sf.river <- seine
+sf.buff <- st_buffer(sf.river,dist = 5000)
+ggplot() + 
+  geom_sf(data = sf.river) + 
+  geom_sf(data = sf.buff, 
+          fill = 'red',
+          alpha=.5
+          )
+```
+]
+
+---
+
+# Unary geometry operations: type transformations (casting)
+
+- **Casting:** transform a feature geometry's type into another <span style="color: rgb(0,114,178)">based on its vertices</span>
+```{r, warning=FALSE, message=F,echo=c(4:7), fig.show='hide'}
+library(sf)
+library(tidyverse)
+library(spData)
+sf.river <- seine
+sf.river
+```
+
+---
+
+# Unary geometry operations: type transformations (casting)
+
+- **Casting:** transform a feature geometry's type into another <span style="color: rgb(0,114,178)">based on its vertices</span>
+```{r, warning=FALSE, message=F,echo=c(4:7), fig.show='hide'}
+library(sf)
+library(tidyverse)
+library(spData)
+sf.river <- seine
+sf.cast <- st_cast(sf.river, #<<
+                     to = 'MULTIPOINT' #<<
+                     ) #<<
+sf.cast
+```
+
+
+---
+
+# Binary geometry operations: clipping
+
+**Clipping:** restricting geometry space <span style="color: rgb(0,114,178)">within the topological relationship</span> between two features. Example - intersection:
+
+.center[<img src="https://r.geocompx.org/05-geometry-operations_files/figure-html/points-1.png" style="width: 50%" />]
+
+---
+
+# Binary geometry operations: clipping
+
+**Clipping:** restricting geometry space <span style="color: rgb(0,114,178)">within the topological relationship</span> between two features. Example - intersection:
+
+.center[<img src="https://r.geocompx.org/05-geometry-operations_files/figure-html/circle-intersection-1.png" style="width: 50%" />]
+
+---
+
+# Binary geometry operations: clipping (other relationships)
+
+.center[<img src="https://r.geocompx.org/05-geometry-operations_files/figure-html/venn-clip-1.png" style="width: 75%" />]
+
+---
+
+# Binary geometry operations: distances
+
+One of the <span style="color: rgb(213,94,0)">**most used GIS tools**</span> for economics, with `st_distance()`. Works both with a single or a pair of geometries!
+
+```{r, warning=FALSE, message=F}
+library(spData)
+library(sf)
+sf.centr <- st_centroid(seine)
+st_distance(sf.centr) #<<
+```
+
+---
+
+# Binary geometry operations: distances
+
+One of the <span style="color: rgb(213,94,0)">**most used GIS tools**</span> for economics, with `st_distance()`. Works both with a single or a pair of geometries!
+
+```{r, warning=FALSE, message=F}
+library(spData)
+library(sf)
+sf.centr <- st_centroid(seine)
+st_distance(sf.centr, by_element = T) #<<
+```
+
+---
+
+# Binary geometry operations: distances
+
+One of the <span style="color: rgb(213,94,0)">**most used GIS tools**</span> for economics, with `st_distance()`. Works both with a single or a pair of geometries!
+
+```{r, warning=FALSE, message=F}
+library(spData)
+library(sf)
+sf.centr <- st_centroid(seine)
+st_distance(sf.centr, seine) #<<
+```
+
+---
+
+# Binary geometry operations: distances
+
+One of the <span style="color: rgb(213,94,0)">**most used GIS tools**</span> for economics, with `st_distance()`. Works both with a single or a pair of geometries!
+
+```{r, warning=FALSE, message=F}
+library(spData)
+library(sf)
+sf.centr <- st_centroid(seine)
+st_distance(sf.centr, seine, by_element = T) #<<
+```
+
+---
+class: inverse, center, middle
+count: false
+
+# Your turn: Take-home
+
+# Assignment
+
+---
+
+# Take-home assignment (1/2)
+
+.pull-left[
+**Combine** the world shape `world` with:
+
+- Population (point) data (do not use rasters!)
+
+- Ports, airports, etc.
+
+- All data is available at Natural Earth!
+]
+.pull-right[
+
+**Produce:**
+
+- Map of total population by country
+
+- Histogram of country population distribution by continent
+
+- Histogram of (country-level) average distances between locations and ports **or** airports by continent.
+
+]
+
+---
+
+# Take-home assignment (2/2)
+
+Briefly read
+
+* Porteous, O., 2019. High trade costs and their consequences: An estimated dynamic model of African agricultural storage and trade. *American Economic Journal: Applied Economics*, *11(4)*, pp.327-66.
+
+Then, download the paper's data ([<u>here</u>](https://www.openicpsr.org/openicpsr/project/116359/version/V1/view)), combine with `world` and transportation (e.g. road, railroad) data to:
+
+1. Generate an `sf` `POINT` feature of market prices across Africa; plot them
+
+2. Calculate minimum distance of each market to the (i) coast, (ii) nearest road, and (iii) nearest airport
+
+3. Produce 3 scatter plots relating average prices with the minimum distances
+
+Note: the [<u>paper appendix</u>](https://www.aeaweb.org/doi/10.1257/app.20170442.appx) contains a lot of useful information about the market price data!
+
+
+
