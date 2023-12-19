@@ -1,9 +1,9 @@
 ## ------------------------------------------------------
-## 01_CLASS01.R - R Script for Lecture 01 (GIS course).
+## 01_CLASS01.R - R Script for Lecture 01.
 
 # version: 1.0
 # Author: Bruno Conte Leite @2023-24
-# b.conte@unibo.it
+# bruno.conte@bse.eu
 
 ## ------------------------------------------------------
 
@@ -134,13 +134,13 @@ df.merged %>%
 # Saving/exporting data:
 
 # Rdata files: optimized storage (wrt disk space):
-save(df.merged,file = 'merged_dataset.rdata')
+save(df.merged,file = 'merged_dataset.rdata') # can also be .rds
 
 # My advise: always export data in csv with 'tab' separator:
 fwrite(x = df.merged,file = 'merged_dataset.csv', sep = '\t')
 
 # if you like Stata files:
-library(haven)
+library(haven) # librrary to load/save Stata .dta files
 
 # Importantly: Stata does not allow for '.' or other
 # symbols in the column names. Replace them with '_':
@@ -185,7 +185,7 @@ ggplot(df.merged) +
   geom_point(aes(Wind,Temp)) +
   geom_smooth(aes(Wind,Temp),method = 'lm')
 
-# For hands-in exercises:
+# For hands-on exercises:
 df.ex.1 <- data.table(datasets::CO2)
 df.ex.2 <- data.table(datasets::state.x77)
 

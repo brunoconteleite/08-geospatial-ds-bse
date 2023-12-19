@@ -1,9 +1,9 @@
 ## ------------------------------------------------------
-## 01_CLASS02.R - R Script for Lecture 02 (GIS course).
+## 01_CLASS02.R - R Script for Lecture 02.
 
 # version: 1.0
 # Author: Bruno Conte Leite @2023-24
-# b.conte@unibo.it
+# bruno.conte@bse.eu
 
 ## ------------------------------------------------------
 
@@ -89,39 +89,28 @@ ggplot(gmsf.point) +
 # Using the 'world' data from spData:
 gmsf.world <- world
 gmsf.world
-# First plotting with plot()
-plot(gmsf.world)
-plot(gmsf.world[,'continent'])
-plot(gmsf.world %>% select('continent')) # dplyr syntax
-plot(st_geometry(gmsf.world)) # only geometry, no attributes
 
-# using ggplot:
+# Plotting it with ggplot:
 ggplot(gmsf.world) +
   geom_sf()
 ggplot(gmsf.world) +
   geom_sf(aes(fill=continent))
 
-# Filtering spatial data:
-gmsf.EU <- gmsf.world %>% 
-  filter(subregion %in% c('Southern Europe'))
-
-ggplot(gmsf.EU) +
-  geom_sf(aes(fill=name_long))
-
 # 1.4. Plotting them together (multilayer
 # ggplot):
 
 ggplot() + # leave empty, add data to geometry
-  geom_sf(data = gmsf.EU) +
+  geom_sf(data = gmsf.world) +
   geom_sf(data = gmsf.point)
 
 ggplot() + # leave empty, add data to geometry
-  geom_sf(data = gmsf.EU, aes(fill = name_long)) +
+  geom_sf(data = gmsf.world, aes(fill = continent)) +
   geom_sf(data = gmsf.point)
 
 ggplot() + # leave empty, add data to geometry
-  geom_sf(data = gmsf.EU) +
-  geom_sf(data = gmsf.point, aes(color = name))
+  geom_sf(data = gmsf.world) +
+  geom_sf(data = gmsf.point, aes(color = name)) +
+  theme_bw()
 
 # 1.5. SF WITH EXTERNAL DATA (I.E. COORDS)
 
@@ -145,26 +134,20 @@ sf.cities <- st_as_sf(
   )
 sf.cities
 
-# Getting EU without Russia for visualization
-# (using multiple filtering conditions):
-
-sf.EU <- world %>% 
-  filter(continent=='Europe' & name_long!='Russian Federation')
-
 # Plotting as before:
 ggplot() + # leave empty, add data to geometry
-  geom_sf(data = sf.EU) +
+  geom_sf(data = world) +
   geom_sf(data = sf.cities, aes(color = name))
 # multiple aesthetics (aes):
 ggplot() + # leave empty, add data to geometry
-  geom_sf(data = sf.EU, aes(fill=subregion)) +
+  geom_sf(data = world, aes(fill=continent)) +
   geom_sf(data = sf.cities, aes(shape = language))
 
 # 1.6. Saving/exporting sf data:
 
 # Save as .rdata (or .RDS) as usual 
 # with save():
-save(sf.cities, 'sf_cities.rdata')
+save(sf.cities, 'sf_cities.rdata') # or .rds
 
 # Exporting it (e.g. shapefile) with st_write():
 st_write(sf.cities,'Sandbox/sf_cities.shp')
@@ -359,9 +342,6 @@ ggplot(sf.world.merged) +
 
 # 4.2. Downloading external data and plotting
 # it (airports by size)
-
-# 4.3. Vector attribute operations: merging
-# and aggregating
 
 # ----
 

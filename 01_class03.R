@@ -3,7 +3,7 @@
 
 # version: 1.0
 # Author: Bruno Conte Leite @2023-24
-# b.conte@unibo.it
+# bruno.conte@bse.eu
 
 ## ------------------------------------------------------
 
@@ -27,17 +27,21 @@ sf.world %>% # tidyverse syntax
 # /variables):
 sf.world[,1:3]
 sf.world %>% 
-  select(1:3) # or by names, as we already did
+  select(1:3) # by index
+
+sf.world %>% # by names: MUCH MORE RECCOMENDED!
+  select(iso_a2,name_long, continent)
 
 # Filtering: countries whose area>200.000 km2
 sf.world %>% 
-  filter(area_km2>200000) # select variables
+  filter(area_km2>2*1e5) # select variables
 
-# Filtering: note that there is an underlying
-# logical vector (TRUE/FALSE):
-sf.world$area_km2>200000
-logical.vector <- sf.world$area_km2>200000
+# FOR ILLUSTRATION: when filtering, there is
+# an underlying logical vector (TRUE/FALSE):
+sf.world$area_km2>2*1e5
+logical.vector <- sf.world$area_km2>2*1e5
 sf.world[logical.vector,]
+rm(logical.vector)
 
 
 # 1.2. Aggregating
@@ -74,12 +78,12 @@ rm(df.world)
 sf.world.agg <- world %>% 
   group_by(continent) %>% 
   summarize(pop = sum(pop))
-
 # Likely error: how to solve it?
 # https://stackoverflow.com/questions/68478179/how-to-resolve-spherical-geometry-failures-when-joining-spatial-data
+
 sf_use_s2(F)
-# be careful with this: it is happening because this
-# geometry has low precision! Not reccomended!
+# Be careful with this: it happens because this
+# geometry has low precision! Watch out!
 
 sf.world.agg <- sf.world %>% 
   group_by(continent) %>% 
@@ -110,6 +114,8 @@ ggplot(sf.world.agg) +
 # what is scale_*()?
 
 rm(sf.world.agg)
+
+sf_use_s2(T) # restore default
 
 # 3.3. Vector merging (joining):
 

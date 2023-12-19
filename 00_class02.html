@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Lecture 02</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Bruno Conte" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer-bse.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+&lt;!-- class: inverse, center, title-slide, middle --&gt;
+class: center, middle
+
+&lt;style&gt;
+.title-slide .remark-slide-number {
+  display: none;
+}
+&lt;/style&gt;
+
+# Lecture 02: Geospatial Data Sciences
+
+# and Economic Spatial Models
+
+## &lt;img src="figs/bse_primary_logo.png" style="width: 35%" /&gt;&lt;br&gt;&lt;br&gt;Bruno Conte
+
+## 15/Jan/2024
+
+---
+
+# Geospatial Data and Spatial Models: Schedule
+
+1. ~~Introduction to (spatial) data and programming in `R`~~ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[08/Jan/2024]**
+
+2. Week 2-4: Vector spatial data &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[15 - 29/Jan/2024]**
+    - Week 2: Introduction and basics of vector data using `sf`
+    - Week 3: Vector data operations: attribute- and spatial-based
+    - Week 4: Geometry-based operations (or transformations)
+
+3. Week 5-7: Raster spatial data + (basic) interactive tools &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[05 - 19/Feb/2024]**
+
+4. Week 8-10: Spatial models and applications with data &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[26/Feb - 11 Mar/2024]**&lt;br&gt; &lt;br&gt;
+
+5. &lt;span style="color: rgb(177,148,40)"&gt;Take-home exam&lt;/span&gt; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[??/??/2024]**
+
+---
+
+# Main references for this class
+
+1. Lovelace, R., Nowosad, J. and Muenchow, J., 2019. &lt;span style="color: rgb(0,130,155)"&gt;**Geocomputation with R.**&lt;/span&gt; Chapman and Hall/CRC.
+
+2. Pebesma, E., 2018. Simple Features for R: Standardized Support for Spatial Vector Data. The R Journal 10 (1), 439-446
+
+3. Wickham, H. and Grolemund, G., 2016. R for data science: import, tidy, transform, visualize, and model data. " O'Reilly Media, Inc.".
+
+---
+
+# Spatial data types: vector and raster
+
+- GIS systems represent spatial data in either &lt;span style="color: rgb(0,130,155)"&gt;vector&lt;/span&gt; or &lt;span style="color: rgb(0,130,155)"&gt;raster&lt;/span&gt; formats
+  - **Vector data:** spatial geometries as a collection of points over a geography
+  
+  - Can represent &lt;span style="color: rgb(174,77,41)"&gt;different objects&lt;/span&gt; (points, lines, polygons, multiobjects)
+
+.center[
+&lt;img src="https://r.geocompx.org/figures/sfcs-1.png" style="width: 80%" /&gt;
+]
+
+---
+count: false
+
+# Spatial data types: vector and raster
+
+- GIS systems represent spatial data in either &lt;span style="color: rgb(0,130,155)"&gt;vector&lt;/span&gt; or &lt;span style="color: rgb(0,130,155)"&gt;raster&lt;/span&gt; formats
+  - **Vector data:** spatial geometries as a collection of points over a geography
+  
+  - Can represent &lt;span style="color: rgb(174,77,41)"&gt;different objects&lt;/span&gt; (points, lines, polygons, multiobjects)
+
+.center[
+&lt;img src="https://r.geocompx.org/figures/multis-1.png" style="width: 80%" /&gt;
+]
+
+---
+
+# Spatial data types: vector and raster
+
+- GIS systems represent spatial data in either &lt;span style="color: rgb(0,130,155)"&gt;vector&lt;/span&gt; or &lt;span style="color: rgb(0,130,155)"&gt;raster&lt;/span&gt; formats
+  - **Raster data:** geography as continuos of pixels (gridcells) with associated values
+  
+  - Normally represents &lt;span style="color: rgb(174,77,41)"&gt;high resolution&lt;/span&gt; features of the geography (like an image)
+
+.center[
+&lt;img src="https://r.geocompx.org/figures/raster-intro-plot-1.png" style="width: 70%" /&gt;
+]
+
+---
+
+# Spatial data types: vector and raster
+
+- Normally represents &lt;span style="color: rgb(174,77,41)"&gt;high resolution&lt;/span&gt; features of the geography (like an image)
+
+.center[
+&lt;img src="https://r.geocompx.org/figures/raster-intro-plot2-1.png" style="width: 70%" /&gt;
+]
+
+---
+
+# Spatial data files: vector and raster
+
+- **Vector data:** file packages (usually multifiles)
+  - Shapefiles (`*.shp`), contains also several auxiliar files (e.g. `*.dbf`, `*.shx`). &lt;span style="color: rgb(174,77,41)"&gt;Most used!&lt;/span&gt;
+  
+  - GeoJSON (`.json`) is written in Javascript (used mostly in web interfaces)
+  
+  - Geopackage (`*.gpk`), unique package/file
+  
+  - KMZ (`*.kmz`), from Google Earth format
+  
+- **Raster data:** imagery
+  - `*.tiff` (most used)
+  
+  - Other image files (e.g. `jpeg`, `gif`, `png`)
+  
+  - NetCDF files (`*.nc`) standardized data for geoscience (CDF = common data format) 
+  
+---
+
+# Spatial data: sources
+
+There is almost **infinite** availability of spatial data in the internet. Here is a non-comprehensive list:
+
+.pull-left[
+- &lt;u&gt;[Natural Earth:](https://www.naturalearthdata.com/downloads/)&lt;/u&gt; immense GIS database
+- &lt;u&gt;[SAGE:](https://sedac.ciesin.columbia.edu/data/sets/browse)&lt;/u&gt; also large GIS databse
+- &lt;u&gt;[DIVA:](https://www.diva-gis.org/gdata)&lt;/u&gt; nice GIS database by country
+- &lt;u&gt;[GADM:](https://gadm.org/data.html)&lt;/u&gt; country boundaries (ADM0-4)
+- &lt;u&gt;[USGS:](https://earthexplorer.usgs.gov/)&lt;/u&gt; satellite imagery
+- &lt;u&gt;[Modis:](https://www.earthdata.nasa.gov/learn/find-data/near-real-time/rapid-response/modis-subsets)&lt;/u&gt; satellite imagery
+- &lt;u&gt;[STRM:](https://dwtkns.com/srtm/)&lt;/u&gt; elevation
+- &lt;u&gt;[SAGE:](https://sage.nelson.wisc.edu/data-and-models/datasets/)&lt;/u&gt; land cover
+- &lt;u&gt;[GFC:](http://earthenginepartners.appspot.com/science-2013-global-forest/download_v1.1.html)&lt;/u&gt; forest change
+- &lt;u&gt;[gROADS:](https://sedac.ciesin.columbia.edu/data/collection/groads)&lt;/u&gt; road networks
+- &lt;u&gt;[Mineral Resources:](https://mrdata.usgs.gov/mrds/)&lt;/u&gt; location of minerals
+]
+.pull-right[
+- &lt;u&gt;[AQUASTAT:](https://www.fao.org/aquastat/en/databases/)&lt;/u&gt; water-related data
+- &lt;u&gt;[FAO-GAEZ:](https://gaez.fao.org/)&lt;/u&gt; farm/land-related data
+- &lt;u&gt;[Harvest Choice:](https://www.ifpri.org/project/harvestchoice)&lt;/u&gt; farm/land-related data
+- &lt;u&gt;[mapSPAM:](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/PRFF8V)&lt;/u&gt; farm/land-related data
+- &lt;u&gt;[PS Lab:](https://psl.noaa.gov/data/gridded/index.html)&lt;/u&gt; temperature/precipitation
+- &lt;u&gt;[SPEI:](https://spei.csic.es/database.html)&lt;/u&gt; drought index
+- &lt;u&gt;[LSMS:](https://www.worldbank.org/en/programs/lsms)&lt;/u&gt; geocoded surveys
+- &lt;u&gt;[DHS surveys:](https://dhsprogram.com/data/)&lt;/u&gt; geocoded surveys
+- &lt;u&gt;[Geographic names:](https://geographic.org/geographic_names/index.html)&lt;/u&gt; to geocode localities
+- &lt;u&gt;[Long-lat:](https://www.latlong.net/convert-address-to-lat-long.html)&lt;/u&gt; API to geocode by names
+- &lt;u&gt;[NOAA VIIS:](https://www.ngdc.noaa.gov/eog/dmsp/downloadV4composites.html)&lt;/u&gt; Satellite Nighttime lights
+]
+  
+---
+class: inverse, center, middle
+count: false
+
+# Getting started: Vector data
+
+# and the Simple Features in R
+
+---
+
+# Vector data and geographical projections
+
+.pull-left[
+- **Vector:** &lt;span style="color: rgb(0,130,155)"&gt;collection of points&lt;/span&gt; over a geography (longitude-latitude; i.e. X-Y)
+ 
+- X-Y geographical axis: change depending on the &lt;span style="color: rgb(174,77,41)"&gt;geographical projection&lt;/span&gt;
+
+- Same geometry can be represented by different combination of X-Y points
+
+- &lt;span style="color: rgb(0,130,155)"&gt;Important takeaways:&lt;/span&gt;
+  1. Know the data's projection system
+  2. Standardize them in you applications
+ 
+ 
+]
+
+.pull-right[
+&lt;img src="https://pro.arcgis.com/en/pro-app/latest/help/mapping/properties/GUID-70E253E7-407E-469E-91DA-975B382EA6C9-web.png" style="width: 100%" /&gt;
+]
+
+---
+
+# Vector data and geographical projections
+
+- **Most usual is WGS 84:** longitude (-180,180), latitude (-90,90); &lt;span style="color: rgb(0,130,155)"&gt;CRS code EPSG:4326&lt;/span&gt;
+
+- CRS = Coordinate Reference System (synonym to geographical projection)
+
+.center[
+&lt;img src="https://i.stack.imgur.com/ILqJh.jpg" style="width: 70%" /&gt;
+]
+
+---
+
+# Vector data in R: the simple features package
+
+.pull-left[
+- Spatial data in R: a &lt;span style="color: rgb(174,77,41)"&gt;Simple Feature&lt;/span&gt;&lt;br&gt;(the `sf` library)
+
+- State-of-art, standardized set of functions for GIS tasks
+
+- Replace "old" libraries (e.g. `sp`, `rgdal`)
+
+- &lt;span style="color: rgb(0,130,155)"&gt;Revolution on GIS in R&lt;/span&gt; (`#RSpatial`)
+  - Interacts with `dplyr` "pipe" syntax
+  
+  - Computational- and memory-efficiency gains
+
+]
+.pull-right[
+.center[
+Downloads of `R` libraries:&lt;br&gt;
+
+&lt;img src="https://r.geocompx.org/figures/01-cranlogs.png" style="width: 120%" /&gt;
+]
+]
+
+---
+
+# Vector data in R: the simple features package
+
+- **Core elements of a Simple Feature:**
+  1. &lt;span style="color: rgb(0,130,155)"&gt;Geometry&lt;/span&gt; (point, lines, polygons): a collection of points (`sfg`, simple feature geometry)
+  
+  2. &lt;span style="color: rgb(174,77,41)"&gt;Projection:&lt;/span&gt; a CRS parameter that places the points over the world's geography (`sfc`, simple feature column)
+  
+  3. &lt;span style="color: rgb(177,148,40)"&gt;Attributes:&lt;/span&gt; data associated with each feature/observation (1+2+3 = `sf`: simple feature)
+&lt;br&gt;&lt;br&gt;
+
+.center[
+&lt;img src="figs/02-sfdiagram.png" style="width: 100%" /&gt;
+]
+
+
+---
+
+# Vector data in R: the simple features package
+
+- Representation of a Simple Feature in `R` console
+.center[
+&lt;img src="figs/02-representation.png" style="width: 100%" /&gt;
+]
+
+---
+
+# Vector data in R: creating simple features
+
+1. Creating &lt;span style="color: rgb(0,130,155)"&gt;geometries:&lt;/span&gt;
+  - Points: `st_point()` with a x-y **vector**
+  
+  - Lines: `st_linestring()` with a **matrix** of all x-y coordinates (columns) of each line vertex (rows)
+  
+  - Polygons: `st_polygon()` with a **list** containing a matrix of all x-y coordinates of each polygon vertex (first and last must be the same!)
+  
+2. Adding &lt;span style="color: rgb(174,77,41)"&gt;projection:&lt;/span&gt; `st_sfc(geometry,crs)`
+  - Adds the `crs` projection to the `st_*()` geometry
+  
+  - WGS 84: use `crs = 'EPSG:4326'`
+
+3. Creating a &lt;span style="color: rgb(177,148,40)"&gt;simple feature:&lt;/span&gt; `st_sf(data.attributes,geometry = sfc)`
+
+---
+class: inverse, center, middle
+count: false
+
+# Vector data with Simple Features:
+
+# attribute data operations
+
+---
+
+# Vector data operations
+
+- **Operations  of spatial features** (i.e. manipulation): by attribute or geometry (spatial)
+  - &lt;span style="color: rgb(0,130,155)"&gt;Attribute&lt;/span&gt; opperations: disciplined by the underlying attributes (feature's dataset)
+
+  - &lt;span style="color: rgb(0,130,155)"&gt;Spatial&lt;/span&gt; operations: manipulations across the space (i.e. rotating, moving, distances, etc.)
+  
+- Attribute data operations:
+  - Nested on `dplyr` "pipe" operators/funtions (e.g. filter, slice, etc.)
+  
+  - Equivalent to data operations but also &lt;span style="color: rgb(174,77,41)"&gt;accounting for the geometry&lt;/span&gt; of the feature
+  
+- **Detailed exposition:** on class material `01_class02.R`
+
+---
+
+# Hands-on: your turn! (1/2)
+
+.pull-left[
+- Creating &lt;span style="color: rgb(0,130,155)"&gt;artificial spatial data&lt;/span&gt; with `sf`
+
+- Generate the following features:
+  - `MULTIPOINT ((3.2 4), (3 4.6), (3.8 4.4), (3.5 3.8), (3.4 3.6), (3.9 4.5))`
+  
+  - `LINESTRING (0 3, 0 4, 1 5, 2 5)`
+  
+  - `POLYGON ((0 0, 1 0, 3 2, 2 4, 1 4, 0 0))`
+  
+- &lt;span style="color: rgb(174,77,41)"&gt;Plot them&lt;/span&gt; together with `ggplot()`
+]
+
+.pull-right[
+![](figs/class02/unnamed-chunk-1-1.png)&lt;!-- --&gt;
+
+]
+
+---
+
+# Hands-on: your turn! (2/2)
+
+- **Map of world airports:** download the shapefile of &lt;span style="color: rgb(174,77,41)"&gt;airports&lt;/span&gt; in the world from Natural Earth (large scale data). Differentiate airport &lt;span style="color: rgb(0,130,155)"&gt;types by color&lt;/span&gt;
+
+.center[
+&lt;img src="figs/map_airports.png" style="width: 100%" /&gt;
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

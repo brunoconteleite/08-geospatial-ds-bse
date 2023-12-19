@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Lecture 04</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Bruno Conte" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer-bse.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+&lt;!-- class: inverse, center, title-slide, middle --&gt;
+class: center, middle
+
+&lt;style&gt;
+g { color: rgb(0,130,155) }
+r { color: rgb(174,77,41) }
+y { color: rgb(177,148,40) }
+&lt;/style&gt;
+
+
+# Lecture 04: Geospatial Data Sciences
+
+# and Economic Spatial Models
+
+## &lt;img src="figs/bse_primary_logo.png" style="width: 35%" /&gt;&lt;br&gt;&lt;br&gt;Bruno Conte
+
+## 29/Jan/2024
+
+---
+
+# Geospatial Data and Spatial Models: Schedule
+
+1. ~~Introduction to (spatial) data and programming in `R`~~ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[08/Jan/2024]**
+
+2. Week 2-4: Vector spatial data &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[15 - 29/Jan/2024]**
+    - ~~Week 2: Introduction and basics of vector data using `sf`~~
+    - ~~Week 3: Vector data operations: attribute- and spatial-based~~
+    - Week 4: Geometry-based operations (or transformations)
+
+3. Week 5-7: Raster spatial data + (basic) interactive tools &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[05 - 19/Feb/2024]**
+
+4. Week 8-10: Spatial models and applications with data &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[26/Feb - 11 Mar/2024]**&lt;br&gt; &lt;br&gt;
+
+5. &lt;span style="color: rgb(177,148,40)"&gt;Take-home exam&lt;/span&gt; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[??/??/2024]**
+
+---
+
+# Main references for this class
+
+1. Lovelace, R., Nowosad, J. and Muenchow, J., 2019. &lt;g&gt;**Geocomputation with R.**&lt;/g&gt; Chapman and Hall/CRC.
+  - Chapter 5 (spatial geometry operations)
+
+2. Pebesma, E., 2018. Simple Features for R: Standardized Support for Spatial Vector Data. The R Journal 10 (1), 439-446
+
+3. Wickham, H. and Grolemund, G., 2016. R for data science: import, tidy, transform, visualize, and model data. " O'Reilly Media, Inc.".
+
+---
+
+# Follow-up: any feedback/issues?
+
+- &lt;g&gt;Course pace&lt;/g&gt;, contents, complexity (or lack of)?
+
+- Timetable, assignments, examination/grading?
+
+- &lt;g&gt;Course format&lt;/g&gt; (exposition + practice)?
+
+- The instructor? ;)
+
+- &lt;g&gt;Anything else&lt;/g&gt;?
+  - (email if not comfortable)
+
+---
+
+# Geometry operations
+
+- &lt;g&gt;**Geometry operations:**&lt;/g&gt; manipulation of vector data that uses/&lt;r&gt;**manipulate its geometry**&lt;/r&gt;. Operations can be both:
+  - **Unary:** geometry operations that require (and manipulate) a single feature
+      1. Simplification
+      2. Centroids
+      3. Buffers
+      4. Casting
+  
+  - **Binary:** operations that interact two features (e.g. distance)
+      1. Clipping/subsetting
+      2. Distances
+
+---
+
+# Unary geometry operations: simplify
+
+It reduces number of vertices (**CPU intense**!). Simplifying complex polygons: chapter 5.2.1.
+
+.pull-left[
+.center[
+**Raw geometry:**
+![](figs/class04/unnamed-chunk-1-1.png)&lt;!-- --&gt;
+]
+]
+.pull.right[
+.center[
+**Simplified geometry:**
+![](figs/class04/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+]
+]
+
+---
+
+# Unary geometry operations: centroids
+
+Assigns the &lt;r&gt;center of mass&lt;/r&gt; (**a point**) of a geometry (line or polygon). For disjoint centroids: use `st_point_on_surface()`!
+
+.pull-left[
+
+```r
+sf.us &lt;- us_states
+*sf.cent &lt;- st_centroid(sf.us)
+ggplot() +
+  geom_sf(data = sf.us) +
+  geom_sf(data = sf.cent, shape = 3)
+```
+]
+
+.pull-right[
+&lt;img src="figs/class04/unnamed-chunk-4-1.png" width="100%" /&gt;
+]
+
+---
+
+# Unary geometry operations: centroids
+
+Assigns the &lt;r&gt;center of mass&lt;/r&gt; (**a point**) of a geometry (line or polygon). For disjoint centroids: use `st_point_on_surface()`!
+
+.pull-left[
+
+```r
+sf.river &lt;- seine
+*sf.cent &lt;- st_centroid(sf.river)
+ggplot() +
+  geom_sf(data = sf.river) +
+  geom_sf(data = sf.cent,
+          shape = 16,
+          color = 'red'
+          )
+```
+]
+
+.pull-right[
+&lt;img src="figs/class04/unnamed-chunk-6-1.png" width="80%" /&gt;
+]
+
+---
+
+# Unary geometry operations: centroids
+
+Assigns the &lt;r&gt;center of mass&lt;/r&gt; (**a point**) of a geometry (line or polygon). For disjoint centroids: use `st_point_on_surface()`!
+
+.pull-left[
+
+```r
+sf.river &lt;- seine
+*sf.cent &lt;- st_point_on_surface(sf.river)
+ggplot() +
+  geom_sf(data = sf.river) +
+  geom_sf(data = sf.cent,
+          shape = 16,
+          color = 'red'
+          )
+```
+]
+
+.pull-right[
+&lt;img src="figs/class04/unnamed-chunk-8-1.png" width="80%" /&gt;
+]
+
+---
+
+# Unary geometry operations: buffers
+
+.pull-left[
+- **Buffer zone:** area around a feature containing locations/space &lt;g&gt;within a certain distance&lt;/g&gt;.
+
+```r
+sf.river &lt;- seine
+*sf.buff &lt;- st_buffer(sf.river,
+*                    dist = 5000
+*                    )
+ggplot() + 
+  geom_sf(data = sf.river) + 
+  geom_sf(data = sf.buff, 
+          fill = 'red',
+          alpha=.5
+          )
+```
+
+]
+.pull.right[
+&lt;img src="figs/class04/unnamed-chunk-10-1.png" width="50%" /&gt;
+]
+
+---
+
+# Unary geometry operations: type transformations (casting)
+
+- **Casting:** transform a feature geometry's type into another &lt;g&gt;based on its vertices&lt;/g&gt;
+
+```r
+sf.river &lt;- seine
+sf.river
+```
+
+```
+## Simple feature collection with 3 features and 1 field
+## Geometry type: MULTILINESTRING
+## Dimension:     XY
+## Bounding box:  xmin: 518344.7 ymin: 6660431 xmax: 879955.3 ymax: 6938864
+## Projected CRS: RGF93 / Lambert-93
+##    name                       geometry
+## 1 Marne MULTILINESTRING ((879955.3 ...
+## 2 Seine MULTILINESTRING ((828893.6 ...
+## 3 Yonne MULTILINESTRING ((773482.1 ...
+```
+
+---
+
+# Unary geometry operations: type transformations (casting)
+
+- **Casting:** transform a feature geometry's type into another &lt;g&gt;based on its vertices&lt;/g&gt;
+
+```r
+sf.river &lt;- seine
+*sf.cast &lt;- st_cast(sf.river,
+*                    to = 'MULTIPOINT'
+*                    )
+sf.cast
+```
+
+```
+## Simple feature collection with 3 features and 1 field
+## Geometry type: MULTIPOINT
+## Dimension:     XY
+## Bounding box:  xmin: 518344.7 ymin: 6660431 xmax: 879955.3 ymax: 6938864
+## Projected CRS: RGF93 / Lambert-93
+##    name                       geometry
+## 1 Marne MULTIPOINT ((879955.3 67557...
+## 2 Seine MULTIPOINT ((828893.6 67138...
+## 3 Yonne MULTIPOINT ((773482.1 66604...
+```
+
+
+---
+
+# Binary geometry operations: clipping
+
+**Clipping:** restricting geometry space &lt;r&gt;within the topological relationship&lt;/r&gt; between two features. Example - intersection:
+
+.center[&lt;img src="https://r.geocompx.org/figures/points-1.png" style="width: 50%" /&gt;]
+
+---
+
+# Binary geometry operations: clipping
+
+**Clipping:** restricting geometry space &lt;r&gt;within the topological relationship&lt;/r&gt; between two features. Example - intersection:
+
+.center[&lt;img src="https://r.geocompx.org/figures/circle-intersection-1.png" style="width: 50%" /&gt;]
+
+---
+
+# Binary geometry operations: clipping (other relationships)
+
+.center[&lt;img src="https://r.geocompx.org/figures/venn-clip-1.png" style="width: 75%" /&gt;]
+
+---
+
+# Binary geometry operations: distances
+
+One of the &lt;r&gt;**most used GIS tools**&lt;/r&gt; for economics, with `st_distance()`. Works both with a single or a pair of geometries!
+
+
+```r
+library(spData)
+library(sf)
+sf.centr &lt;- st_centroid(seine)
+*st_distance(sf.centr)
+```
+
+```
+## Units: [m]
+##          1        2        3
+## 1      0.0 111458.4 119082.6
+## 2 111458.4      0.0 136560.9
+## 3 119082.6 136560.9      0.0
+```
+
+---
+
+# Binary geometry operations: distances
+
+One of the &lt;r&gt;**most used GIS tools**&lt;/r&gt; for economics, with `st_distance()`. Works both with a single or a pair of geometries!
+
+
+```r
+library(spData)
+library(sf)
+sf.centr &lt;- st_centroid(seine)
+*st_distance(sf.centr, by_element = T)
+```
+
+```
+## Units: [m]
+## [1] 0 0 0
+```
+
+---
+
+# Binary geometry operations: distances
+
+One of the &lt;r&gt;**most used GIS tools**&lt;/r&gt; for economics, with `st_distance()`. Works both with a single or a pair of geometries!
+
+
+```r
+library(spData)
+library(sf)
+sf.centr &lt;- st_centroid(seine)
+*st_distance(sf.centr, seine)
+```
+
+```
+## Units: [m]
+##            [,1]     [,2]      [,3]
+## [1,]  32317.409 27135.47 77735.006
+## [2,]   3262.824  6126.58 51637.691
+## [3,] 129403.368 72121.86  5876.571
+```
+
+---
+
+# Binary geometry operations: distances
+
+One of the &lt;r&gt;**most used GIS tools**&lt;/r&gt; for economics, with `st_distance()`. Works both with a single or a pair of geometries!
+
+
+```r
+library(spData)
+library(sf)
+sf.centr &lt;- st_centroid(seine)
+*st_distance(sf.centr, seine, by_element = T)
+```
+
+```
+## Units: [m]
+## [1] 32317.409  6126.580  5876.571
+```
+
+---
+class: inverse, center, middle
+count: false
+
+# Your turn: Take-home
+
+# Assignment
+
+---
+
+# Take-home assignment (1/2)
+
+**Deadline:** until next class (5 February 2024 8:30 am) &lt;y&gt;**by email**&lt;/y&gt;.
+
+.pull-left[
+**Combine** the world shape `world` with:
+
+- Population (point) data (do not use rasters!)
+
+- Ports, airports, etc.
+
+- All data is available at Natural Earth!
+]
+.pull-right[
+
+**Produce:**
+
+- Map of total population by country
+
+- Histogram of country population distribution by continent
+
+- Histogram of (country-level) average distances between locations and ports **or** airports by continent.
+
+]
+
+---
+
+# Take-home assignment (2/2)
+
+Briefly read
+
+* Porteous, O., 2019. High trade costs and their consequences: An estimated dynamic model of African agricultural storage and trade. *American Economic Journal: Applied Economics*, *11(4)*, pp.327-66.
+
+Then, download the paper's data ([&lt;u&gt;here&lt;/u&gt;](https://www.openicpsr.org/openicpsr/project/116359/version/V1/view)), combine with `world` and transportation (e.g. road, railroad) data to:
+
+1. Generate an `sf` `POINT` feature of market prices across Africa; plot them
+
+2. Calculate minimum distance of each market to the (i) coast, (ii) nearest road, and (iii) nearest airport
+
+3. Produce 3 scatter plots relating average prices with the minimum distances
+
+Note: the [&lt;u&gt;paper appendix&lt;/u&gt;](https://www.aeaweb.org/doi/10.1257/app.20170442.appx) contains a lot of useful information about the market price data!
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
