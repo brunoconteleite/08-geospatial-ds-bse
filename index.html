@@ -371,91 +371,149 @@ pre code {
 School of Economics</p>
 <div id="overview" class="section level2">
 <h2>Overview</h2>
-<p>This is a master/Ph.D. course on basic theory and tools for using
-spatial data in economic research.</p>
+<p>This course introduces the basics for working with geospatial data:
+datasets that reflect geographical features of the reality. Using
+<code>R</code> (and <code>Rstudio</code>) as the main programming
+platform, and <code>sf</code> as the main package, students by the end
+of the course are expected to achieve the following objectives:</p>
+<ul>
+<li><p>Identify sources of (and retrieve) different types of geospatial
+data from standard databases or the web</p></li>
+<li><p>Manipulate raw spatial data (i.e. data wrangle) into the
+structure that fits the desired analysis/application</p></li>
+<li><p>Visualize geospatial data in static and interactive frameworks
+(i.e. maps and dashboards)</p></li>
+<li><p>Implement basic concepts of economic spatial models (e.g. optimal
+route choices, optimal transportation networks) in real applications by
+linking geospatial data to these models</p></li>
+<li><p>Document results with reproduceable markdown reports</p></li>
+</ul>
 <p>All practical applications are taking place in <code>R</code> and
 <code>RStudio</code>. <strong>Please have both installed in your
-computer</strong> before starting the course.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+computer</strong> before starting the course.</p>
 </div>
 <div id="course-structure" class="section level2">
 <h2>Course structure</h2>
 <p>This is a 20 hours course, divided in ten sessions of 2 hours each.
-Its overall structure follows:</p>
+Its overall structure is divided in three parts as follows:</p>
+<div id="part-1-introduction-vector-data-and-basic-spatial-analysis" class="section level4">
+<h4>Part 1: Introduction, vector data, and basic spatial analysis</h4>
 <ul>
-<li><p><strong>Session 1:</strong> Introduction to spatial data and data
-wrangling in R</p>
+<li><p><strong>Session 1:</strong> Introduction to geospatial data and
+applications in business and research</p>
 <ul>
-<li><p>Basic aspects of <code>R</code> (<code>data.table</code>,
-<code>tidyverse</code>, <code>ggplot2</code>), spatial data, and
-applications in economic research</p></li>
-<li><p>Class slides in <strong><a href="https://brunoconteleite.github.io/02-gis-unibo/00_class01.html">html</a></strong>
-and <strong><a href="https://brunoconteleite.github.io/02-gis-unibo/00_class01.pdf">pdf</a></strong></p></li>
-<li><p>Hands-in material <strong><a href="https://www.dropbox.com/s/gyjmlxnqk24u312/01_class01.R?dl=1">here</a></strong></p></li>
+<li><p>Basic aspects of <code>R</code> (<code>tidyverse</code>,
+<code>ggplot2</code>), spatial data, and applications in economic
+research</p></li>
+<li><p>Class slides <strong><a href="https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class01.html">here</a></strong>
+and hands-on material <strong><a href="https://www.dropbox.com/scl/fi/973hbquayt7v8jfd85qaa/01_class01.R?rlkey=85y5cbp2bkd1jrt9e2q1uynrp&amp;dl=1">here</a></strong></p></li>
 </ul></li>
 <li><p><strong>Session 2:</strong> Vector spatial data (points, lines,
 and polygons)</p>
 <ul>
-<li><p>Loading and manipulating with <code>sf</code>. Basic principles
-of spatial (re)projections. Basic attribute data operations
-(e.g. <code>filter()</code>, <code>slice()</code>) with
-<code>data.table</code> and data visualization with
+<li><p>Creating, loading, and manipulating vector data with
+<code>sf</code></p></li>
+<li><p>Spatial (re)projections and basic data visualization with
 <code>ggplot2</code></p></li>
-<li><p><em>Assignment:</em> replicating maps from academic papers.
-Instructions <strong><a href="https://brunoconteleite.github.io/02-gis-unibo/00_class02.html#24">here</a></strong></p></li>
-<li><p>Class slides in <strong><a href="https://brunoconteleite.github.io/02-gis-unibo/00_class02.html">html</a></strong>
-and <strong><a href="https://brunoconteleite.github.io/02-gis-unibo/00_class02.pdf">pdf</a></strong></p></li>
-<li><p>Hands-in material <strong><a href="https://www.dropbox.com/s/cbytt7ehgkrn105/01_class02.R?dl=1">here</a></strong></p></li>
+<li><p><strong>Class slides</strong> <strong><a href="https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class02.html">here</a></strong>
+and hands-on material <strong><a href="https://www.dropbox.com/scl/fi/y5eofzitrbvr84sity8z8/01_class02.R?rlkey=xl3lcrl9mq8tg80xfk4kuw5ss&amp;dl=1">here</a></strong></p></li>
 </ul></li>
-<li><p><strong>Session 3:</strong> Spatial data operations with vector
+<li><p><strong>Session 3:</strong> Attribute- and spatial-based
+operations with vector data</p>
+<ul>
+<li><p>Operations with vector data: attribute-based
+(e.g. <code>filter()</code>, <code>slice()</code>) and spatial-based
+(e.g. <code>st_intersects()</code>, <code>st_overlaps()</code>,
+<code>st_touches()</code>, <code>st_join()</code>,
+<code>aggregate()</code>)</p></li>
+<li><p><strong>Class slides</strong> <strong><a href="https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class03.html">here</a></strong>
+and hands-on material <strong><a href="https://www.dropbox.com/scl/fi/y65fnibf31pizsd0mm8y0/01_class03.R?rlkey=n76yl7pf3g0wo5l28983181ui&amp;dl=1">here</a></strong></p></li>
+<li><p><em>Assignment:</em> reproducing operations with proposed data
+and replicating results from academic papers. Instructions <strong><a href="https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class03.html#20">here</a></strong></p></li>
+</ul></li>
+<li><p><strong>Session 4:</strong> Geometry-based operations with vector
 data</p>
 <ul>
-<li><p>Spatial Subsetting and topological relations
-(e.g. <code>st_intersects()</code>, <code>st_overlaps()</code>,
-<code>st_touches()</code>), spatial joining and aggregation
-(e.g. <code>st_join()</code>, <code>aggregate()</code>), and calculating
-distances (and spatial networks) with <code>gdistance</code>,
-<code>rgeos</code>, and <code>igraph</code></p></li>
-<li><p><del><em>Assignment:</em> reproducing operations with proposed
-data and replicating results from academic papers. Instructions
-here</del></p></li>
-<li><p>Class slides <strong><a href="https://brunoconteleite.github.io/02-gis-unibo/00_class03.html">html</a></strong>
-and <strong><a href="https://brunoconteleite.github.io/02-gis-unibo/00_class03.pdf">pdf</a></strong></p></li>
-<li><p>Hands-in material <strong><a href="https://www.dropbox.com/s/envahn55fnyot9w/01_class03.R?dl=1">here</a></strong></p></li>
-</ul></li>
-<li><p><strong>Session 4:</strong> Spatial geometry operations and
-miscelania</p>
-<ul>
-<li><p>Basic operations with vector data (e.g. centroids, shift, rotate,
-buffering)</p></li>
-<li><p>Time allowing: Reporting data work with <code>R</code>: a short
-introduction to <code>rmarkdown</code></p></li>
+<li><p>Unary operations (e.g., simplification, centroids, buffers,
+casting)</p></li>
+<li><p>Binary operations (e.g., clipping, subsetting, calculating
+distances)</p></li>
+<li><p><strong>Class slides</strong> <strong><a href="https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class04.html">here</a></strong>
+and hands-on material <strong><a href="https://www.dropbox.com/scl/fi/79bp963jvk4ou13h7zt6p/01_class04.R?rlkey=u90ul5z2uk0o96jtih3xdwlvv&amp;dl=1">here</a></strong></p></li>
 <li><p><em>Class follow-up:</em> feedback on course pace, reinforcing
 concepts, etc.</p></li>
-<li><p><em>Assignment:</em> reproducing operations with proposed data
-and replicating results from academic papers. Instructions <strong><a href="https://brunoconteleite.github.io/02-gis-unibo/00_class04.html#21">here</a></strong></p></li>
-<li><p>Class slides <strong><a href="https://brunoconteleite.github.io/02-gis-unibo/00_class04.html">html</a></strong>
-and <strong><a href="https://brunoconteleite.github.io/02-gis-unibo/00_class04.pdf">pdf</a></strong></p></li>
-<li><p>Hands-in material <strong><a href="https://www.dropbox.com/s/ijcy1f3b381mcug/01_class04.R?dl=1">here</a></strong></p></li>
-</ul></li>
-<li><p><strong>Session 5:</strong> Raster data</p>
-<ul>
-<li><p>Loading and manipulating raster data with <code>terra</code>.
-Basic raster operations (e.g. <code>crop</code>, <code>vectorize</code>,
-and <code>rasterize</code>)</p></li>
-<li><p>Managing curse of dimensionality and large disk and memory needs
-for dealing with raster data</p></li>
-<li><p>Raster-vector operations with <code>terra</code> and
-<code>exactextractr</code> (e.g. extracting, rasterizing, vectorizing,
-zonal statistics)</p></li>
-<li><p>Distance over rasters: using rasters as frictions surfaces to
-calculate optimal paths with <code>gdistance</code></p></li>
-<li><p><em>Assignment:</em> replication of results and spatial
-statistics. Instructions <strong><a href="https://brunoconteleite.github.io/02-gis-unibo/00_class05.html#15">here</a></strong></p></li>
-<li><p>Class slides <strong><a href="https://brunoconteleite.github.io/02-gis-unibo/00_class05.html">html</a></strong>
-and <strong><a href="https://brunoconteleite.github.io/02-gis-unibo/00_class05.pdf">pdf</a></strong></p></li>
-<li><p>Hands-in material <strong><a href="https://www.dropbox.com/s/otjoukms3eiexga/01_class05.R?dl=1">here</a></strong></p></li>
+<li><p><em>Assignment:</em> Produce maps and statistics (histograms,
+correlations) with real-world spatial data. Instructions <strong><a href="https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class04.html#21">html</a></strong></p></li>
 </ul></li>
 </ul>
+</div>
+<div id="part-2-raster-image-data-and-interactive-data-visualization" class="section level4">
+<h4>Part 2: Raster (image) data and interactive data visualization</h4>
+<ul>
+<li><p><strong>Session 5:</strong> Raster basics</p>
+<ul>
+<li><p>Basic differences between raster (image) and vector data</p></li>
+<li><p>Creating raster data with <code>terra</code></p></li>
+<li><p>Unary raster operations (e.g. <code>crop</code> and
+<code>vectorize</code>)</p></li>
+<li><p><strong>Class slides</strong> <strong><a href="https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class05.html">here</a></strong>
+and hands-on material <strong><a href="https://www.dropbox.com/scl/fi/9jt29xa0501l40g7jkz2a/01_class05.R?rlkey=k4w9r5nvtwxb82dzyygzcdmku&amp;dl=1">here</a></strong></p></li>
+</ul></li>
+<li><p><strong>Session 6:</strong> Raster-vector operations</p>
+<ul>
+<li><p>Basic differences between raster (image) and vector data</p></li>
+<li><p>Creating raster data with <code>terra</code></p></li>
+<li><p>Unary raster operations (e.g. <code>crop</code> and
+<code>vectorize</code>)</p></li>
+<li><p><strong>Class slides</strong> <strong><a href="https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class06.html">here</a></strong>
+and hands-on material <strong><a href="https://www.dropbox.com/scl/fi/qrkf6z4tc0zpfgwgmkofz/01_class06.R?rlkey=nlm9qro5s5j9dstqo9f1qj4mb&amp;dl=1">here</a></strong></p></li>
+</ul></li>
+<li><p><strong>Session 7:</strong> Interactive tools</p>
+<ul>
+<li><p>Basic differences between raster (image) and vector data</p></li>
+<li><p>Creating raster data with <code>terra</code></p></li>
+<li><p>Unary raster operations (e.g. <code>crop</code> and
+<code>vectorize</code>)</p></li>
+<li><p><strong>Class slides</strong> <strong><a href="https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class07.html">here</a></strong>
+and hands-on material <strong><a href="https://www.dropbox.com/scl/fi/hvhl89opousx5um91e1br/01_class07.R?rlkey=aypx3tlji3ce7n50v4i242g1d&amp;dl=1">here</a></strong></p></li>
+</ul></li>
+</ul>
+</div>
+<div id="part-3-spatial-models-in-economics-and-real-world-applications" class="section level4">
+<h4>Part 3: Spatial models in economics and real-world applications</h4>
+<ul>
+<li><p><strong>Session 8:</strong> Economic spatial models and
+real-world applications</p>
+<ul>
+<li><p>Basic differences between raster (image) and vector data</p></li>
+<li><p>Creating raster data with <code>terra</code></p></li>
+<li><p>Unary raster operations (e.g. <code>crop</code> and
+<code>vectorize</code>)</p></li>
+<li><p><strong>Class slides</strong> <strong><a href="https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class08.html">here</a></strong>
+and hands-on material <strong><a href="https://www.dropbox.com/scl/fi/cieb5exa83yck0nqajmqd/01_class08.R?rlkey=oc7ejd3wmdefyb2uoubhonch2&amp;dl=1">here</a></strong></p></li>
+</ul></li>
+<li><p><strong>Session 9:</strong> Geospatial data with spatial models:
+optimal worker commuting choices within a city</p>
+<ul>
+<li><p>Basic differences between raster (image) and vector data</p></li>
+<li><p>Creating raster data with <code>terra</code></p></li>
+<li><p>Unary raster operations (e.g. <code>crop</code> and
+<code>vectorize</code>)</p></li>
+<li><p><strong>Class slides</strong> <strong><a href="https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class09.html">here</a></strong>
+and hands-on material <strong><a href="https://www.dropbox.com/scl/fi/dh1hzxr07fcvd4giqha1q/01_class09.R?rlkey=lfc0gdp61pyc15a583ady6ar5&amp;dl=1">here</a></strong></p></li>
+</ul></li>
+<li><p><strong>Session 10:</strong> Geospatial data with spatial models:
+optimal shopping choices of consumers</p>
+<ul>
+<li><p>Basic differences between raster (image) and vector data</p></li>
+<li><p>Creating raster data with <code>terra</code></p></li>
+<li><p>Unary raster operations (e.g. <code>crop</code> and
+<code>vectorize</code>)</p></li>
+<li><p><strong>Class slides</strong> <strong><a href="https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class10.html">here</a></strong>
+and hands-on material <strong><a href="https://www.dropbox.com/scl/fi/y5gyxfpbhce9vu37moa7o/01_class10.R?rlkey=s8cw5bwqus3pwdjld90k83xnw&amp;dl=1">here</a></strong></p></li>
+</ul></li>
+</ul>
+</div>
 </div>
 <div id="references" class="section level2">
 <h2>References</h2>
@@ -473,12 +531,6 @@ tidy, transform, visualize, and model data. ” O’Reilly Media,
 Inc.”.</p></li>
 </ul>
 </div>
-</div>
-<div class="footnotes footnotes-end-of-document">
-<hr />
-<ol>
-<li id="fn1"><p>Test.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-</ol>
 </div>
 
 

@@ -52,7 +52,7 @@ y { color: rgb(177,148,40) }
 
 # Main references for this class
 
-1. Lovelace, R., Nowosad, J. and Muenchow, J., 2019. &lt;span style="color: rgb(0,114,178)"&gt;**Geocomputation with R.**&lt;/span&gt; Chapman and Hall/CRC.
+1. Lovelace, R., Nowosad, J. and Muenchow, J., 2019. &lt;g&gt;**Geocomputation with R.**&lt;/g&gt; Chapman and Hall/CRC.
   - Chapters 2.3, 3.3, 4.3, 5.3, and 6
 
 2. Pebesma, E., 2018. Simple Features for R: Standardized Support for Spatial Vector Data. The R Journal 10 (1), 439-446
@@ -63,10 +63,10 @@ y { color: rgb(177,148,40) }
 
 # Raster data: basics
 
-- GIS systems represent &lt;span style="color: rgb(0,114,178)"&gt;raster data&lt;/span&gt; as an "image":
+- GIS systems represent &lt;g&gt;raster data&lt;/g&gt; as an "image":
   - Geography as continuum of pixels (gridcells) with associated values
   
-  - Normally represents &lt;span style="color: rgb(213,94,0)"&gt;high resolution&lt;/span&gt; features of the geography (like an image)
+  - Normally represents &lt;r&gt;high resolution&lt;/r&gt; features of the geography (like an image)
 
 .center[
 &lt;img src="https://r.geocompx.org/figures/raster-intro-plot-1.png" style="width: 70%" /&gt;
@@ -76,7 +76,7 @@ y { color: rgb(177,148,40) }
 
 # Raster data: basics
 
-- Normally represents &lt;span style="color: rgb(213,94,0)"&gt;high resolution&lt;/span&gt; features of the geography (like an image)
+- Normally represents &lt;r&gt;high resolution&lt;/r&gt; features of the geography (like an image)
 
 .center[
 &lt;img src="https://r.geocompx.org/figures/raster-intro-plot2-1.png" style="width: 70%" /&gt;
@@ -86,17 +86,19 @@ y { color: rgb(177,148,40) }
 
 # Raster data (and other operations with rasters) in R
 
-Requires additional libraries/packages than `sf`
+Requires **additional libraries** on top of `sf`&lt;sup&gt;1&lt;/sup&gt;
 
-1. `terra`: contains most of the raster-related functions
+1. `terra`: contains most of the &lt;r&gt;**raster-related functions**&lt;/r&gt;
 
-2. `exactextractr`: performs high-performance zonal statistics
+2. `exactextractr`: performs high-performance &lt;y&gt;zonal statistics&lt;/y&gt;
 
-3. `gdistance`: used to calculate distances over raster
+3. `gdistance`: used to calculate &lt;g&gt;distances over raster&lt;/g&gt;
+
+.footnote[[1] Note that this is not an exhaustive list of libraries. Advanced users might want to check `stars`.]
 
 ---
 
-# Raster basics: loading and creating with terra
+# Raster basics: data structure with terra
 
 - **Raster data:** represented with `terra`'s `SpatRaster` object
 
@@ -104,31 +106,344 @@ Requires additional libraries/packages than `sf`
 
 ---
 
-# Raster basics: loading and creating with terra
+# Raster basics: data structure with terra
 
-Further details in `01_class05.R`, covering:
 
-- **Creating or loading** it: with `terra::rast()` function
+.pull-left[
 
-- **Unary operations:**
-    - Cropping
-    - Vectorization
+- Prevous example: one-layer raster
 
-- **Vector-raster operations:**
-    - Ddata extraction
-    - Zonal statistics
-    - Rasterize
-    - Distances over raster
+- Rasters can also be &lt;y&gt;**multidimensional**&lt;/y&gt; (also called a *raster stack* or *brick*)
+
+- **Examples:**
+
+  - &lt;r&gt;Imagery:&lt;/r&gt; combination of 3 RGB layers (red, green, blue)
+
+  - &lt;g&gt;Time varying&lt;/g&gt; data (e.g., temperatures, precipitation, ...)
+
+]
+.pull-right[
+.center[&lt;img src="figs/rast_multilayer_1.png" style="width: 85%" /&gt;]
+]
+
+---
+
+# Raster basics: data structure with terra
+
+
+.pull-left[
+
+- Prevous example: one-layer raster
+
+- Rasters can also be &lt;y&gt;**multidimensional**&lt;/y&gt; (also called a *raster stack* or *brick*)
+
+- **Examples:**
+
+  - &lt;r&gt;Imagery:&lt;/r&gt; combination of 3 RGB layers (red, green, blue)
+
+  - &lt;g&gt;Time varying&lt;/g&gt; data (e.g., temperatures, precipitation, ...)
+
+]
+.pull-right[
+.center[&lt;img src="figs/rast_multilayer_2.png" style="width: 85%" /&gt;]
+]
+
+---
+
+# Raster basics: data structure with terra
+
+
+.pull-left[
+
+- **Data formats:**
+
+  - `.tif` is the &lt;g&gt;most usual&lt;/g&gt;
+
+  - Other image formats (`.jpeg`, `.png`)
+
+  - NetCDF format `.nc` for &lt;r&gt;multi-layer rasters&lt;/r&gt; (optimized for disk space!)
+  
+- The function `terra::rast()` is versatile (works with all types)!
+
+]
+.pull-right[
+.center[&lt;img src="figs/rast_multilayer_2.png" style="width: 85%" /&gt;]
+]
+
+
+---
+
+# Raster basics: loading, creating, and operations with rasters
+
+Further details in `01_class05.R` and `01_class06.R`, covering:
+
+.pull-left[
+
+- Creating and loading rasters with `terra`
+
+- &lt;r&gt;Unary&lt;/r&gt; operations:
+  - Cropping
+  - Vectorization
+  
+]
+.pull-right[
+
+- &lt;g&gt;Vector-raster&lt;/g&gt; operations (next class!):
+  - Data extraction
+  - Zonal statistics
+  - Rasterize
+  - Distances over networks using rasters
+  
+
+]
+
+---
+
+# Raster basics: loading, creating, and operations with rasters
+
+- Creating an empty raster with `terra::rast()`
+
+
+```r
+library(terra)
+r &lt;- rast()
+*r 
+```
+
+```
+## class       : SpatRaster 
+## dimensions  : 180, 360, 1  (nrow, ncol, nlyr)
+## resolution  : 1, 1  (x, y)
+## extent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
+## coord. ref. : lon/lat WGS 84
+```
+
+- **Default empty raster:** covers the &lt;g&gt;Earth surface&lt;/g&gt; with `\(1 \times 1\)` resolution
+
+- It also uses the standard long/lat projection
+
+---
+
+# Raster basics: loading, creating, and operations with rasters
+
+- Creating an empty raster with `terra:rast()`
+
+
+```r
+library(terra)
+r &lt;- rast()
+*head(values(r))
+```
+
+```
+##      lyr.1
+## [1,]   NaN
+## [2,]   NaN
+## [3,]   NaN
+## [4,]   NaN
+## [5,]   NaN
+## [6,]   NaN
+```
+
+- **Default empty raster:** comes with &lt;g&gt;missing values&lt;/g&gt;
+
+- Retrieved with `terra::values()` as a matrix (&lt;r&gt;column = layer&lt;/r&gt;)
+
+---
+
+# Raster basics: loading, creating, and operations with rasters
+
+.pull-left[
+
+- Assigning raster values: `terra::values()`
+  - Watch out the dimension: use `ncell()`
+
+- &lt;g&gt;Plotting&lt;/g&gt; rasters:
+  - Use `plot()`
+  - `ggplot` later!
+  
+]
+.pull-right[
+
+```r
+library(terra)
+r &lt;- rast()
+*values(r) &lt;- 1:ncell(r)
+*plot(r)
+```
+
+![](figs/class05/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+]
+
+---
+
+# Raster basics: loading, creating, and operations with rasters
+
+.pull-left[
+
+- &lt;g&gt;Cropping rasters&lt;/g&gt; with `terra::crop()`
+  - Crop a raster around a `sf` object
+  - **Example with Brazil**'s polygon
+
+- &lt;r&gt;Vectorizing&lt;/r&gt; rasters:
+  - Transform a raster into a `sf` object (point, polygon)
+  
+]
+.pull-right[
+
+```r
+sf.brazil &lt;- world %&gt;% 
+  filter(iso_a2=='BR')
+*plot(r)
+*plot(st_geometry(sf.brazil),
+* add=T) # add layer
+```
+
+![](figs/class05/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+]
+
+---
+
+# Raster basics: loading, creating, and operations with rasters
+
+.pull-left[
+
+- &lt;g&gt;Cropping rasters&lt;/g&gt; with `terra::crop()`
+  - Crop a raster around a `sf` object
+  - **Example with Brazil**'s polygon
+
+- &lt;r&gt;Vectorizing&lt;/r&gt; rasters:
+  - Transform a raster into a `sf` object (point, polygon)
+  
+]
+.pull-right[
+
+```r
+*r.crop &lt;- crop(r,sf.brazil) # cropping
+plot(r.crop)
+plot(st_geometry(sf.brazil),
+  add=T)
+```
+
+![](figs/class05/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+]
+
+---
+
+# Raster basics: loading, creating, and operations with rasters
+
+.pull-left[
+
+- &lt;g&gt;Cropping rasters&lt;/g&gt; with `terra::crop()`
+  - Crop a raster around a `sf` object
+  - Example with Brazil's polygon
+
+- &lt;r&gt;Vectorizing&lt;/r&gt; rasters:
+  - Transform a raster into a `sf` object
+  
+- **For points:** use `as.points() %&gt;% st_as_sf()`
+  - Attention with `lyr.1` attribute (what is it?)
+  
+]
+.pull-right[
+
+```r
+r.crop &lt;- crop(r,sf.brazil)
+sf.point &lt;- as.points(r.crop) %&gt;% 
+  st_as_sf()
+*sf.point
+```
+
+```
+## Simple feature collection with 1521 features and 1 field
+## Geometry type: POINT
+## Dimension:     XY
+## Bounding box:  xmin: -73.5 ymin: -33.5 xmax: -35.5 ymax: 4.5
+## Geodetic CRS:  WGS 84
+## First 10 features:
+##    lyr.1          geometry
+## 1  30707 POINT (-73.5 4.5)
+## 2  30708 POINT (-72.5 4.5)
+## 3  30709 POINT (-71.5 4.5)
+## 4  30710 POINT (-70.5 4.5)
+## 5  30711 POINT (-69.5 4.5)
+## 6  30712 POINT (-68.5 4.5)
+## 7  30713 POINT (-67.5 4.5)
+## 8  30714 POINT (-66.5 4.5)
+## 9  30715 POINT (-65.5 4.5)
+## 10 30716 POINT (-64.5 4.5)
+```
+]
+
+---
+
+# Raster basics: loading, creating, and operations with rasters
+
+.pull-left[
+
+- &lt;g&gt;Cropping rasters&lt;/g&gt; with `terra::crop()`
+  - Crop a raster around a `sf` object
+  - Example with Brazil's polygon
+
+- &lt;r&gt;Vectorizing&lt;/r&gt; rasters:
+  - Transform a raster into a `sf` object
+  
+- **For points:** use `as.points() %&gt;% st_as_sf()`
+  - Attention with `lyr.1` attribute (what is it?)
+  
+]
+.pull-right[
+
+```r
+r.crop &lt;- crop(r,sf.brazil)
+sf.point &lt;- as.points(r.crop) %&gt;% 
+  st_as_sf()
+plot(r.crop)
+*plot(st_geometry(sf.point),add=T)
+```
+
+![](figs/class05/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+]
+
+---
+
+# Raster basics: loading, creating, and operations with rasters
+
+.pull-left[
+
+- &lt;g&gt;Cropping rasters&lt;/g&gt; with `terra::crop()`
+  - Crop a raster around a `sf` object
+  - Example with Brazil's polygon
+
+- &lt;r&gt;Vectorizing&lt;/r&gt; rasters:
+  - Transform a raster into a `sf` object
+  
+- **For polygons:** use `as.polygons()` instead!
+  - Excellent for building &lt;y&gt;equally sized grids&lt;/y&gt;!
+  
+]
+.pull-right[
+
+```r
+r.crop &lt;- crop(r,sf.brazil)
+sf.pol &lt;- as.polygons(r.crop) %&gt;% 
+  st_as_sf()
+plot(r.crop)
+*plot(st_geometry(sf.pol),add=T)
+```
+
+![](figs/class05/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+]
 
 ---
 class: inverse, center, middle
 count: false
 
-# Your turn: Hands-in
+# Your turn: Hands-on
 
 ---
 
-# Hands-in: your turn! (1/3)
+# Hands-on: your turn! (1/1)
 
 .pull-left[
 Dividing Italy in **gridcells**
@@ -144,154 +459,6 @@ Dividing Italy in **gridcells**
 ]
 .pull-right[
 .center[&lt;img src="figs/raster02.png" style="width: 85%" /&gt;]
-]
-
----
-
-# Hands-in: your turn! (2/3)
-
-.pull-left[
-Calculating **climate change** in USA
-
-- Use the `us_states` data on the geography of US states
-
-- Combine it with the SPEI index:
-    - Retrieve average SPEI index across states
-    - Do so for 3-4 different years
-
-- Visualize it:
-
-]
-.pull-right[
-.center[
-&lt;img src="figs/raster03.png" style="width: 100%" /&gt;&lt;br&gt;
-&lt;img src="figs/raster04.png" style="width: 100%" /&gt;
-]
-]
-
----
-
-# Hands-in: your turn! (3/3)
-
-.pull-left[
-Geography and **bilateral distances** in Spain
-
-- Use the `ne_10m_populated_places` shapefile to retrieve the **10 top-populated places** in Spain
-
-- Crop the elevation data from `MSR_50M.tif` raster with Spain
-
-- Visualize them together with `plot()` function
-
-- Calculate the path and distance between Madrid and Vigo
-    - Hint: approx. 640 km!
-
-
-]
-.pull-right[
-.center[
-&lt;img src="figs/raster05.png" style="width: 100%" /&gt;
-]
-]
-
----
-counter: false
-
-# Hands-in: your turn! (3/3)
-
-.pull-left[
-Geography and **bilateral distances** in Spain
-
-- Use the `ne_10m_populated_places` shapefile to retrieve the **10 top-populated places** in Spain
-
-- Crop the elevation data from `MSR_50M.tif` raster with Spain
-
-- Visualize them together with `plot()` function
-
-- Calculate the path and distance between Madrid and Vigo
-    - Hint: approx. 640 km!
-
-
-]
-.pull-right[
-.center[
-&lt;img src="figs/raster06.png" style="width: 100%" /&gt;
-]
-]
-
----
-class: inverse, center, middle
-count: false
-
-# Your turn: Take-home
-
-# Assignment
-
----
-
-# Take-home assignment (1/2)
-
-.pull-left[
-Calculating **climate change** in USA
-
-- Use the `us_states` data on the geography of US states
-
-- Retrieve average SPEI index across **regions** for the past 50 years
-
-- Retrieve the dataset as a panel (time series for each region)
-
-- Plot the evolution of the SPEI index for each region
-    - `geom_smooth()`: calculate the average across regions
-
-]
-.pull-right[
-.center[
-&lt;img src="figs/raster09.png" style="width: 100%" /&gt;
-]
-]
-
----
-
-# Take-home assignment (2/2)
-
-.pull-left[
-&lt;span style="color: rgb(0,114,178)"&gt;Transportation centrality&lt;/span&gt; and isolation in Spain
-
-- Use the `ne_10m_populated_places` shapefile to retrieve the **10 top-populated places**
-
-- Crop the `ne_10m_roads` road data within Spain
-
-- Build a raster/friction surface; calculate distances between **all city pairs**
-
-- Bilateral distances if coming from Madrid vs. Vigo: &lt;span style="color: rgb(213,94,0)"&gt;who is more isolated?&lt;/span&gt;
-    - `geom_density()`: calculates "smoothed" distributions
-]
-.pull-right[
-.center[
-&lt;img src="figs/raster07.png" style="width: 100%" /&gt;
-]
-]
-
----
-counter: false
-
-# Take-home assignment (2/2)
-
-.pull-left[
-&lt;span style="color: rgb(0,114,178)"&gt;Transportation centrality&lt;/span&gt; and isolation in Spain
-
-- Use the `ne_10m_populated_places` shapefile to retrieve the **10 top-populated places**
-
-- Crop the `ne_10m_roads` road data within Spain
-
-- Build a raster/friction surface; calculate distances between **all city pairs**
-
-- Bilateral distances if coming from Madrid vs. Vigo: &lt;span style="color: rgb(213,94,0)"&gt;who is more isolated?&lt;/span&gt;
-    - `geom_density()`: calculates "smoothed" distributions
-]
-.pull-right[
-.center[
-&lt;img src="figs/raster08.png" style="width: 100%" /&gt;
-]
 ]
 
 
