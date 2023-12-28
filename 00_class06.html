@@ -206,7 +206,7 @@ r.spei &lt;- rast('../../Research/Data/gis data/spei/spei01.nc')
 
 ---
 
-# Raster operations: data extraction
+# Raster-vector operations: data extraction
 
 .pull-left[
 
@@ -224,7 +224,7 @@ r.spei &lt;- rast('../../Research/Data/gis data/spei/spei01.nc')
 
 ---
 
-# Raster operations: data extraction
+# Raster-vector operations: data extraction
 
 .pull-left[
 
@@ -244,7 +244,7 @@ r.spei &lt;- rast('../../Research/Data/gis data/spei/spei01.nc')
 
 ---
 
-# Raster operations: zonal statistics
+# Raster-vector operations: zonal statistics
 
 .pull-left[
 
@@ -265,7 +265,7 @@ r.spei &lt;- rast('../../Research/Data/gis data/spei/spei01.nc')
 
 ---
 
-# Raster operations: zonal statistics
+# Raster-vector operations: zonal statistics
 
 .pull-left[
 
@@ -292,7 +292,7 @@ plot(pol,add=T) # a random sf polygon
 
 ---
 
-# Raster operations: zonal statistics
+# Raster-vector operations: zonal statistics
 
 .pull-left[
 
@@ -328,7 +328,7 @@ Why is the result a number?
 
 ---
 
-# Raster operations: rasterizing vector data
+# Raster-vector operations: rasterizing vector data
 
 .pull-left[
 
@@ -347,7 +347,7 @@ Why is the result a number?
 
 ---
 
-# Raster operations: rasterizing vector data
+# Raster-vector operations: rasterizing vector data
 
 .pull-left[
 
@@ -366,7 +366,7 @@ Why is the result a number?
 
 ---
 
-# Raster operations: rasterizing vector data
+# Raster-vector operations: rasterizing vector data
 
 .pull-left[
 
@@ -385,6 +385,140 @@ Why is the result a number?
 ]
 .pull-right[
 &lt;img src="figs/river_rasterize_3.png" style="width: 90%" /&gt;
+]
+
+---
+
+# Raster-vector operations: rasterizing vector data
+
+.pull-left[
+
+&lt;u&gt;Step-by-step&lt;/u&gt; for distances:
+
+* &lt;g&gt;Rasterize&lt;/g&gt; the network with `rasterize()`
+
+* &lt;r&gt;Transform&lt;/r&gt; the raster into a `transition()` matrix
+
+* &lt;y&gt;Distance between two points&lt;/y&gt; with `shortestPath()`
+
+&lt;u&gt;Additional packages:&lt;/u&gt;
+* `raster`, `gdistance`, and `sp`
+
+]
+.pull-right[
+&lt;img src="figs/river_rasterize_3.png" style="width: 90%" /&gt;
+]
+
+---
+
+# Raster-vector operations: rasterizing vector data
+
+.pull-left[
+
+- `terra::rasterize()` needs two inputs:
+  
+  1. &lt;g&gt;Vector input:&lt;/g&gt; as `SpatVector`
+      - Use `terra::vect(sf object)` 
+      
+  2. &lt;r&gt;Template raster:&lt;/r&gt; resolution/extent will be used for the rasterized vector
+      
+- Inpus must have the &lt;u&gt;same projection&lt;/u&gt;
+  
+- Details in `01_class06.R`
+
+]
+.pull-right[
+
+```r
+library(terra)
+library(sf)
+
+# Rasterize syntax:
+rasterized.vector &lt;- rasterize(
+  # sf vector as SpatVector:
+  x = vect(sf.object),
+  # template raster:
+  y = raster.template 
+  )
+```
+]
+
+---
+
+# Raster-vector operations: transition matrices
+
+.pull-left[
+
+- `gdistance::transition()` needs three inputs:
+  
+  1. &lt;g&gt;Raster surface&lt;/g&gt; as `raster` with:
+      - `raster::raster(SpatRaster)`
+      
+  2. &lt;r&gt;Transition function:&lt;/r&gt; tells whether increasing/decreasing on raster values
+      
+  3. &lt;y&gt;Directions of transitions&lt;/y&gt; (8 = all neighb. pixels)
+  
+- Details in `01_class06.R`
+
+]
+.pull-right[
+
+```r
+library(terra)
+library(sf)
+library(gdistance)
+library(raster)
+
+# Tr. matrix syntax:
+tr.matrix &lt;- transition(
+  # Surface as raster::raster() object!
+  x = raster::raster(raster.surface),
+  # Increasing/decreasing function
+  transitionFunction = mean,
+  # Directions (use 8)
+  directions = 8
+)
+```
+]
+
+---
+
+# Raster-vector operations: distances over transition matrices
+
+.pull-left[
+
+- `gdistance::shortestPath()` needs four inputs:
+  
+  1. &lt;g&gt;Transition matrix&lt;/g&gt;
+      
+  2. &lt;r&gt;Origin and goal (destination)&lt;/r&gt; as `sp`
+      - Use `sf::as_Spatial(sf)`
+      
+  3. &lt;y&gt;Output type&lt;/y&gt; (`SpatialLines` = linestring)
+  
+- Details in `01_class06.R`
+
+]
+.pull-right[
+
+```r
+library(terra)
+library(sf)
+library(gdistance)
+library(raster)
+
+# Distance syntax:
+sp.distance &lt;- shortestPath(
+  # Tr. matrix:
+  x = tr.matrix,
+  # Origin point:
+  origin = as_Spatial(sf.points[1,]),
+  # Destination point:
+  goal = as_Spatial(sf.points[2,]),
+  # Output type:
+  output = "SpatialLines"
+)
+```
 ]
 
 ---
