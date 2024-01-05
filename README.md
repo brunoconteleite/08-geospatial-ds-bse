@@ -1,7 +1,7 @@
 <img style="float: right;width: 25%" src="figs/bse_primary_logo.png">
 
 # Geospatial Data Science and Economic Spatial Models
-[Bruno Conte](https://brunoconteleite.github.io/) | [bruno.conte@bse.eu](mailto:bruno.conte@bse.eu)<br>
+[Bruno Conte](https://brunoconteleite.github.io/) | [bruno.conte@bse.eu](mailto:bruno.conte@bse.eu) | Course GitHub repo [here](https://github.com/brunoconteleite/08-geospatial-ds-bse)<br>
 Barcelona School of Economics
  
 ## Overview
@@ -18,7 +18,7 @@ This course introduces the basics for working with geospatial data: datasets tha
 
 * Document results with reproduceable markdown reports
 
-All practical applications are taking place in ``R`` and ``RStudio``. **Please have both installed in your computer** before starting the course.
+All practical applications are taking place in ``R`` and ``RStudio``. **Please have both installed in your computer** and follow these [setup instructions](https://www.dropbox.com/scl/fi/l4xtd3rfrmai7pxl2zu0n/instructions.txt?rlkey=r5zp0q8vu1evb8b12rcgei179&raw=1) before starting the course.
 
 ## Course structure
 
@@ -79,11 +79,7 @@ This is a 20 hours course, divided in ten sessions of 2 hours each. Its overall 
   
 * **Session 7:** Interactive tools
   
-  * Basic differences between raster (image) and vector data
-
-  * Creating raster data with ``terra``
-  
-  * Unary raster operations (e.g. ``crop`` and ``vectorize``)
+  * Basic of interactive dashboards using `leaflet`
   
   * **Class slides** **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class07.html)** and hands-on material **[here](https://www.dropbox.com/scl/fi/hvhl89opousx5um91e1br/01_class07.R?rlkey=aypx3tlji3ce7n50v4i242g1d&dl=1)**
   
@@ -91,31 +87,19 @@ This is a 20 hours course, divided in ten sessions of 2 hours each. Its overall 
 
 * **Session 8:** Economic spatial models and real-world applications
   
-  * Basic differences between raster (image) and vector data
-
-  * Creating raster data with ``terra``
-  
-  * Unary raster operations (e.g. ``crop`` and ``vectorize``)
+  * Introduction to spatial models and applications to academic research
   
   * **Class slides** **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class08.html)** and hands-on material **[here](https://www.dropbox.com/scl/fi/cieb5exa83yck0nqajmqd/01_class08.R?rlkey=oc7ejd3wmdefyb2uoubhonch2&dl=1)**
   
 * **Session 9:** Geospatial data with spatial models: optimal worker commuting choices within a city
   
-  * Basic differences between raster (image) and vector data
-
-  * Creating raster data with ``terra``
-  
-  * Unary raster operations (e.g. ``crop`` and ``vectorize``)
+  * Conceptual and practical issues when linking real-world (geospatial) data to a location commuting choice (spatial) model
   
   * **Class slides** **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class09.html)** and hands-on material **[here](https://www.dropbox.com/scl/fi/dh1hzxr07fcvd4giqha1q/01_class09.R?rlkey=lfc0gdp61pyc15a583ady6ar5&dl=1)**
   
 * **Session 10:** Geospatial data with spatial models: optimal shopping choices of consumers
   
-  * Basic differences between raster (image) and vector data
-
-  * Creating raster data with ``terra``
-  
-  * Unary raster operations (e.g. ``crop`` and ``vectorize``)
+  * Combining a shopping (spatial) model with geospatial data to conduct counterfactual experiments
   
   * **Class slides** **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class10.html)** and hands-on material **[here](https://www.dropbox.com/scl/fi/y5gyxfpbhce9vu37moa7o/01_class10.R?rlkey=s8cw5bwqus3pwdjld90k83xnw&dl=1)**
 
