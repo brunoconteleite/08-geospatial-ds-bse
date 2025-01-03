@@ -20,6 +20,9 @@ class: center, middle
 .title-slide .remark-slide-number {
   display: none;
 }
+g { color: rgb(0,130,155) }
+r { color: rgb(174,77,41) }
+y { color: rgb(177,148,40) }
 &lt;/style&gt;
 
 # Lecture 02: Geospatial Data Sciences
@@ -28,30 +31,30 @@ class: center, middle
 
 ## &lt;img src="figs/bse_primary_logo.png" style="width: 35%" /&gt;&lt;br&gt;&lt;br&gt;Bruno Conte
 
-## 15/Jan/2024
+## 14-15/Jan/2025
 
 ---
 
 # Geospatial Data and Spatial Models: Schedule
 
-1. ~~Introduction to (spatial) data and programming in `R`~~ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[08/Jan/2024]**
+1. ~~Introduction to (spatial) data and programming in `R`~~ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[08/Jan/2025]**
 
-2. Week 2-4: Vector spatial data &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[15 - 29/Jan/2024]**
+2. Week 2-4: Vector spatial data &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[14 - 29/Jan/2025]**
     - Week 2: Introduction and basics of vector data using `sf`
     - Week 3: Vector data operations: attribute- and spatial-based
     - Week 4: Geometry-based operations (or transformations)
 
-3. Week 5-7: Raster spatial data + (basic) interactive tools &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[05 - 19/Feb/2024]**
+3. Week 5-7: Raster spatial data + (basic) interactive tools &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[05 - 19/Feb/2025]**
 
-4. Week 8-10: Spatial models and applications with data &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[26/Feb - 11 Mar/2024]**&lt;br&gt; &lt;br&gt;
+4. Week 8-10: Spatial models and applications with data &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[25/Feb - 12 Mar/2025]**&lt;br&gt; &lt;br&gt;
 
-5. &lt;span style="color: rgb(177,148,40)"&gt;Take-home exam&lt;/span&gt; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[28/Mar/2024]**
+5. &lt;y&gt;Take-home exam&lt;/y&gt; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[28/Mar/2025]**
 
 ---
 
 # Main references for this class
 
-1. Lovelace, R., Nowosad, J. and Muenchow, J., 2019. &lt;span style="color: rgb(0,130,155)"&gt;**Geocomputation with R.**&lt;/span&gt; Chapman and Hall/CRC.
+1. Lovelace, R., Nowosad, J. and Muenchow, J., 2019. &lt;g&gt;**Geocomputation with R.**&lt;/g&gt; Chapman and Hall/CRC.
 
 2. Pebesma, E., 2018. Simple Features for R: Standardized Support for Spatial Vector Data. The R Journal 10 (1), 439-446
 
@@ -61,10 +64,10 @@ class: center, middle
 
 # Spatial data types: vector and raster
 
-- GIS systems represent spatial data in either &lt;span style="color: rgb(0,130,155)"&gt;vector&lt;/span&gt; or &lt;span style="color: rgb(0,130,155)"&gt;raster&lt;/span&gt; formats
+- GIS systems represent spatial data in either &lt;g&gt;vector&lt;/g&gt; or &lt;g&gt;raster&lt;/g&gt; formats
   - **Vector data:** spatial geometries as a collection of points over a geography
   
-  - Can represent &lt;span style="color: rgb(174,77,41)"&gt;different objects&lt;/span&gt; (points, lines, polygons, multiobjects)
+  - Can represent &lt;r&gt;different objects&lt;/r&gt; (points, lines, polygons, multiobjects)
 
 .center[
 &lt;img src="https://r.geocompx.org/figures/sfcs-1.png" style="width: 80%" /&gt;
@@ -75,10 +78,10 @@ class: center, middle
 
 # Spatial data types: vector and raster
 
-- GIS systems represent spatial data in either &lt;span style="color: rgb(0,130,155)"&gt;vector&lt;/span&gt; or &lt;span style="color: rgb(0,130,155)"&gt;raster&lt;/span&gt; formats
+- GIS systems represent spatial data in either &lt;g&gt;vector&lt;/g&gt; or &lt;g&gt;raster&lt;/g&gt; formats
   - **Vector data:** spatial geometries as a collection of points over a geography
   
-  - Can represent &lt;span style="color: rgb(174,77,41)"&gt;different objects&lt;/span&gt; (points, lines, polygons, multiobjects)
+  - Can represent &lt;r&gt;different objects&lt;/r&gt; (points, lines, polygons, multiobjects)
 
 .center[
 &lt;img src="https://r.geocompx.org/figures/multis-1.png" style="width: 80%" /&gt;
@@ -88,10 +91,10 @@ class: center, middle
 
 # Spatial data types: vector and raster
 
-- GIS systems represent spatial data in either &lt;span style="color: rgb(0,130,155)"&gt;vector&lt;/span&gt; or &lt;span style="color: rgb(0,130,155)"&gt;raster&lt;/span&gt; formats
+- GIS systems represent spatial data in either &lt;g&gt;vector&lt;/g&gt; or &lt;g&gt;raster&lt;/g&gt; formats
   - **Raster data:** geography as continuos of pixels (gridcells) with associated values
   
-  - Normally represents &lt;span style="color: rgb(174,77,41)"&gt;high resolution&lt;/span&gt; features of the geography (like an image)
+  - Normally represents &lt;r&gt;high resolution&lt;/r&gt; features of the geography (like an image)
 
 .center[
 &lt;img src="https://r.geocompx.org/figures/raster-intro-plot-1.png" style="width: 70%" /&gt;
@@ -101,7 +104,7 @@ class: center, middle
 
 # Spatial data types: vector and raster
 
-- Normally represents &lt;span style="color: rgb(174,77,41)"&gt;high resolution&lt;/span&gt; features of the geography (like an image)
+- Normally represents &lt;r&gt;high resolution&lt;/r&gt; features of the geography (like an image)
 
 .center[
 &lt;img src="https://r.geocompx.org/figures/raster-intro-plot2-1.png" style="width: 70%" /&gt;
@@ -112,7 +115,7 @@ class: center, middle
 # Spatial data files: vector and raster
 
 - **Vector data:** file packages (usually multifiles)
-  - Shapefiles (`*.shp`), contains also several auxiliar files (e.g. `*.dbf`, `*.shx`). &lt;span style="color: rgb(174,77,41)"&gt;Most used!&lt;/span&gt;
+  - Shapefiles (`*.shp`), contains also several auxiliar files (e.g. `*.dbf`, `*.shx`). &lt;r&gt;Most used!&lt;/r&gt;
   
   - GeoJSON (`.json`) is written in Javascript (used mostly in web interfaces)
   
@@ -173,13 +176,13 @@ class: inverse, center, middle
 # Vector data and geographical projections
 
 .pull-left[
-- **Vector:** &lt;span style="color: rgb(0,130,155)"&gt;collection of points&lt;/span&gt; over a geography (longitude-latitude; i.e. X-Y)
+- **Vector:** &lt;g&gt;collection of points&lt;/g&gt; over a geography (longitude-latitude; i.e. X-Y)
  
-- X-Y geographical axis: change depending on the &lt;span style="color: rgb(174,77,41)"&gt;geographical projection&lt;/span&gt;
+- X-Y geographical axis: change depending on the &lt;r&gt;geographical projection&lt;/r&gt;
 
 - Same geometry can be represented by different combination of X-Y points
 
-- &lt;span style="color: rgb(0,130,155)"&gt;Important takeaways:&lt;/span&gt;
+- &lt;g&gt;Important takeaways:&lt;/g&gt;
   1. Know the data's projection system
   2. Standardize them in you applications
  
@@ -194,7 +197,7 @@ class: inverse, center, middle
 
 # Vector data and geographical projections
 
-- **Most usual is WGS 84:** longitude (-180,180), latitude (-90,90); &lt;span style="color: rgb(0,130,155)"&gt;CRS code EPSG:4326&lt;/span&gt;
+- **Most usual is WGS 84:** longitude (-180,180), latitude (-90,90); &lt;g&gt;CRS code EPSG:4326&lt;/g&gt;
 
 - CRS = Coordinate Reference System (synonym to geographical projection)
 
@@ -207,13 +210,13 @@ class: inverse, center, middle
 # Vector data in R: the simple features package
 
 .pull-left[
-- Spatial data in R: a &lt;span style="color: rgb(174,77,41)"&gt;Simple Feature&lt;/span&gt;&lt;br&gt;(the `sf` library)
+- Spatial data in R: a &lt;r&gt;Simple Feature&lt;/r&gt;&lt;br&gt;(the `sf` library)
 
 - State-of-art, standardized set of functions for GIS tasks
 
 - Replace "old" libraries (e.g. `sp`, `rgdal`)
 
-- &lt;span style="color: rgb(0,130,155)"&gt;Revolution on GIS in R&lt;/span&gt; (`#RSpatial`)
+- &lt;g&gt;Revolution on GIS in R&lt;/g&gt; (`#RSpatial`)
   - Interacts with `dplyr` "pipe" syntax
   
   - Computational- and memory-efficiency gains
@@ -223,7 +226,7 @@ class: inverse, center, middle
 .center[
 Downloads of `R` libraries:&lt;br&gt;
 
-&lt;img src="https://r.geocompx.org/figures/01-cranlogs.png" style="width: 120%" /&gt;
+&lt;img src="figs/cranlogs.png" style="width: 120%" /&gt;
 ]
 ]
 
@@ -232,11 +235,11 @@ Downloads of `R` libraries:&lt;br&gt;
 # Vector data in R: the simple features package
 
 - **Core elements of a Simple Feature:**
-  1. &lt;span style="color: rgb(0,130,155)"&gt;Geometry&lt;/span&gt; (point, lines, polygons): a collection of points (`sfg`, simple feature geometry)
+  1. &lt;g&gt;Geometry&lt;/g&gt; (point, lines, polygons): a collection of points (`sfg`, simple feature geometry)
   
-  2. &lt;span style="color: rgb(174,77,41)"&gt;Projection:&lt;/span&gt; a CRS parameter that places the points over the world's geography (`sfc`, simple feature column)
+  2. &lt;r&gt;Projection:&lt;/r&gt; a CRS parameter that places the points over the world's geography (`sfc`, simple feature column)
   
-  3. &lt;span style="color: rgb(177,148,40)"&gt;Attributes:&lt;/span&gt; data associated with each feature/observation (1+2+3 = `sf`: simple feature)
+  3. &lt;y&gt;Attributes:&lt;/y&gt; data associated with each feature/observation (1+2+3 = `sf`: simple feature)
 &lt;br&gt;&lt;br&gt;
 
 .center[
@@ -257,19 +260,19 @@ Downloads of `R` libraries:&lt;br&gt;
 
 # Vector data in R: creating simple features
 
-1. Creating &lt;span style="color: rgb(0,130,155)"&gt;geometries:&lt;/span&gt;
+1. Creating &lt;g&gt;geometries:&lt;/g&gt;
   - Points: `st_point()` with a x-y **vector**
   
   - Lines: `st_linestring()` with a **matrix** of all x-y coordinates (columns) of each line vertex (rows)
   
   - Polygons: `st_polygon()` with a **list** containing a matrix of all x-y coordinates of each polygon vertex (first and last must be the same!)
   
-2. Adding &lt;span style="color: rgb(174,77,41)"&gt;projection:&lt;/span&gt; `st_sfc(geometry,crs)`
+2. Adding &lt;r&gt;projection:&lt;/r&gt; `st_sfc(geometry,crs)`
   - Adds the `crs` projection to the `st_*()` geometry
   
   - WGS 84: use `crs = 'EPSG:4326'`
 
-3. Creating a &lt;span style="color: rgb(177,148,40)"&gt;simple feature:&lt;/span&gt; `st_sf(data.attributes,geometry = sfc)`
+3. Creating a &lt;y&gt;simple feature:&lt;/y&gt; `st_sf(data.attributes,geometry = sfc)`
 
 ---
 class: inverse, center, middle
@@ -284,14 +287,14 @@ class: inverse, center, middle
 # Vector data operations
 
 - **Operations  of spatial features** (i.e. manipulation): by attribute or geometry (spatial)
-  - &lt;span style="color: rgb(0,130,155)"&gt;Attribute&lt;/span&gt; opperations: disciplined by the underlying attributes (feature's dataset)
+  - &lt;g&gt;Attribute&lt;/g&gt; opperations: disciplined by the underlying attributes (feature's dataset)
 
-  - &lt;span style="color: rgb(0,130,155)"&gt;Spatial&lt;/span&gt; operations: manipulations across the space (i.e. rotating, moving, distances, etc.)
+  - &lt;g&gt;Spatial&lt;/g&gt; operations: manipulations across the space (i.e. rotating, moving, distances, etc.)
   
 - Attribute data operations:
   - Nested on `dplyr` "pipe" operators/funtions (e.g. filter, slice, etc.)
   
-  - Equivalent to data operations but also &lt;span style="color: rgb(174,77,41)"&gt;accounting for the geometry&lt;/span&gt; of the feature
+  - Equivalent to data operations but also &lt;r&gt;accounting for the geometry&lt;/r&gt; of the feature
   
 - **Detailed exposition:** on class material `01_class02.R`
 
@@ -300,7 +303,7 @@ class: inverse, center, middle
 # Hands-on: your turn! (1/2)
 
 .pull-left[
-- Creating &lt;span style="color: rgb(0,130,155)"&gt;artificial spatial data&lt;/span&gt; with `sf`
+- Creating &lt;g&gt;artificial spatial data&lt;/g&gt; with `sf`
 
 - Generate the following features:
   - `MULTIPOINT ((3.2 4), (3 4.6), (3.8 4.4), (3.5 3.8), (3.4 3.6), (3.9 4.5))`
@@ -309,7 +312,7 @@ class: inverse, center, middle
   
   - `POLYGON ((0 0, 1 0, 3 2, 2 4, 1 4, 0 0))`
   
-- &lt;span style="color: rgb(174,77,41)"&gt;Plot them&lt;/span&gt; together with `ggplot()`
+- &lt;r&gt;Plot them&lt;/r&gt; together with `ggplot()`
 ]
 
 .pull-right[
@@ -321,7 +324,7 @@ class: inverse, center, middle
 
 # Hands-on: your turn! (2/2)
 
-- **Map of world airports:** download the shapefile of &lt;span style="color: rgb(174,77,41)"&gt;airports&lt;/span&gt; in the world from Natural Earth (large scale data). Differentiate airport &lt;span style="color: rgb(0,130,155)"&gt;types by color&lt;/span&gt;
+- **Map of world airports:** download the shapefile of &lt;r&gt;airports&lt;/r&gt; in the world from Natural Earth (large scale data). Differentiate airport &lt;g&gt;types by color&lt;/g&gt;
 
 .center[
 &lt;img src="figs/map_airports.png" style="width: 100%" /&gt;

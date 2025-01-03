@@ -20,6 +20,9 @@ class: center, middle
 .title-slide .remark-slide-number {
   display: none;
 }
+g { color: rgb(0,130,155) }
+r { color: rgb(174,77,41) }
+y { color: rgb(177,148,40) }
 &lt;/style&gt;
 
 # Lecture 01: Geospatial Data Sciences
@@ -28,34 +31,34 @@ class: center, middle
 
 ## &lt;img src="figs/bse_primary_logo.png" style="width: 35%" /&gt;&lt;br&gt;&lt;br&gt;Bruno Conte
 
-## 08/Jan/2024
+## 08/Jan/2025
 
 ---
 
 # Geospatial Data and Spatial Models: This Course
 
-- Introduce students to conceptual and practical aspects of &lt;span style="color: rgb(0,130,155)"&gt;spatial data&lt;/span&gt;
+- Introduce students to conceptual and practical aspects of &lt;r&gt;spatial data&lt;/r&gt;
 
   - What is spatial (geographical) data?
-  - How is it used in &lt;span style="color: rgb(0,130,155)"&gt;research in economics&lt;/span&gt; or business applications?
+  - How is it used in &lt;g&gt;research in economics&lt;/g&gt; or business applications?
   - Which tools (i.e. computer systems/languages) do we need to work with it?
     
 --
     
-- Main goal: &lt;span style="color: rgb(177,148,40)"&gt;**concepts + tools**&lt;/span&gt; = practice with real-world data
-    - Concepts: types and formats of spatial data + &lt;span style="color: rgb(0,130,155)"&gt;economic spatial models&lt;/span&gt;
+- Main goal: &lt;y&gt;**concepts + tools**&lt;/y&gt; = practice with real-world data
+    - Concepts: types and formats of spatial data + &lt;g&gt;economic spatial models&lt;/g&gt;
     - Tools: programming in ``R`` and ``RStudio``
     
 --
     
-- Course's **main philosophy**: a course by an &lt;span style="color: rgb(174,77,41)"&gt;economist working with spatial data&lt;/span&gt;
+- Course's **main philosophy**: a course by an &lt;r&gt;economist working with spatial data&lt;/r&gt;
     - Rather than a course by a spatial data's specialist!
     
 ---
 
 # Geospatial Data and Spatial Models: This Course
 
-&lt;u&gt;This course:&lt;/u&gt; how to use spatial data to empirically answer &lt;span style="color: rgb(174,77,41)"&gt;research questions of our interest&lt;/span&gt;.
+&lt;u&gt;This course:&lt;/u&gt; how to use spatial data to empirically answer &lt;r&gt;research questions of our interest&lt;/r&gt;.
 
 .pull-left[
 **You will learn**
@@ -87,31 +90,33 @@ class: center, middle
 
 # Geospatial Data and Spatial Models: This Course
 
-## References
+## Main Text Book
+
+1. Lovelace, R., Nowosad, J. and Muenchow, J., 2019. **Geocomputation with R**. Chapman and Hall/CRC.
+
+## Other (useful) References
 
 1. Donaldson, D. and Storeygard, A., 2016. The view from above: Applications of satellite data in economics. *Journal of Economic Perspectives*, *30(4)*, pp.171-98.
 
-2. Lovelace, R., Nowosad, J. and Muenchow, J., 2019. **Geocomputation with R**. Chapman and Hall/CRC.
+2. Pebesma, E., 2018. Simple Features for R: Standardized Support for Spatial Vector Data. The R Journal 10 (1), 439-446, https://doi.org/10.32614/RJ-2018-009
 
-3. Pebesma, E., 2018. Simple Features for R: Standardized Support for Spatial Vector Data. The R Journal 10 (1), 439-446, https://doi.org/10.32614/RJ-2018-009
-
-4. Wickham, H. and Grolemund, G., 2016. R for data science: import, tidy, transform, visualize, and model data. " O'Reilly Media, Inc.".
+3. Wickham, H. and Grolemund, G., 2016. R for data science: import, tidy, transform, visualize, and model data. " O'Reilly Media, Inc.".
 
 ---
 
 # Geospatial Data and Spatial Models: Schedule
 
-1. Introduction to (spatial) data and programming in `R` &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[08/Jan/2024]**
+1. Introduction to (spatial) data and programming in `R` &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[08/Jan/2025]**
     - Introduction to spatial data and examples in economics
     - Basic `R` programming: set up and practice
 
-2. Week 2-4: Vector spatial data &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[15 - 29/Jan/2024]**
+2. Week 2-4: Vector spatial data &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[14 - 29/Jan/2025]**
 
-3. Week 5-7: Raster spatial data + (basic) interactive tools &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[05 - 19/Feb/2024]**
+3. Week 5-7: Raster spatial data + (basic) interactive tools &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[05 - 19/Feb/2025]**
 
-4. Week 8-10: Spatial models and applications with data &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[26/Feb - 11 Mar/2024]**&lt;br&gt; &lt;br&gt;
+4. Week 8-10: Spatial models and applications with data &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[25/Feb - 12 Mar/2025]**&lt;br&gt; &lt;br&gt;
 
-5. &lt;span style="color: rgb(177,148,40)"&gt;Take-home exam&lt;/span&gt; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[28/Mar/2024]**
+5. &lt;y&gt;Take-home exam&lt;/y&gt; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[28/Mar/2025]**
 
 ---
 
@@ -121,12 +126,12 @@ class: center, middle
 
 2. Practical assignments (3 x 10%, in teams)
 
-3. &lt;span style="color: rgb(0,130,155)"&gt;Take-home exam&lt;/span&gt; (60%, `pdf` by email):
+3. &lt;g&gt;Take-home exam&lt;/g&gt; (60%, `pdf` by email):
   - Research idea: spatial data + problem = **research question**
   
   - Replication of tasks: data + tools = empirical motivation
 
-- Any &lt;span style="color: rgb(174,77,41)"&gt;questions&lt;/span&gt;?
+- Any &lt;r&gt;questions&lt;/r&gt;?
 
 ---
 
@@ -146,7 +151,7 @@ class: center, middle
 - Your own computer + `RStudio`:
   - We will set it up together!
 
-- Any &lt;span style="color: rgb(174,77,41)"&gt;questions&lt;/span&gt;?
+- Any &lt;r&gt;questions&lt;/r&gt;?
 
 ---
 class: inverse, center, middle
@@ -203,7 +208,7 @@ Source: https://www.researchgate.net/figure/A-comparison-of-the-inter-and-intra-
 
 # What is Spatial Data?
 
-- Data/information that has a &lt;span style="color: rgb(174,77,41)"&gt;geographical attribute&lt;/span&gt;
+- Data/information that has a &lt;r&gt;geographical attribute&lt;/r&gt;
   - **Much more** than coordinates on a standard dataset
   
   - Polygons, areas, distances, height, overlaying, intersections, ...
@@ -211,13 +216,13 @@ Source: https://www.researchgate.net/figure/A-comparison-of-the-inter-and-intra-
 --
 
 .pull-left[
-- Common aspect: **&lt;span style="color: rgb(177,148,40)"&gt;unstructured data&lt;/span&gt;** (i.e. unconventional data format)
+- Common aspect: **&lt;y&gt;unstructured data&lt;/y&gt;** (i.e. unconventional data format)
 
 &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;img src="https://previews.123rf.com/images/in8finity/in8finity1506/in8finity150600031/41436580-earth-globe-icons-set-.jpg" style="width: 40%" /&gt;
 ]
 
 .pull-right[
-- Our goal: manipulate it into the **&lt;span style="color: rgb(0,130,155)"&gt;structure&lt;/span&gt;** required by research
+- Our goal: manipulate it into the **&lt;g&gt;structure&lt;/g&gt;** required by research
 
 &lt;img src="https://cdn-icons-png.flaticon.com/512/6925/6925245.png" style="width: 40%" /&gt; &lt;img src="https://cdn-icons-png.flaticon.com/512/5198/5198977.png" style="width: 40%" /&gt;
 
@@ -227,12 +232,12 @@ Source: https://www.researchgate.net/figure/A-comparison-of-the-inter-and-intra-
 
 # What is GIS?
 
-- GIS = &lt;span style="color: rgb(0,130,155)"&gt;Geographic Information Systems&lt;/span&gt;
+- GIS = &lt;g&gt;Geographic Information Systems&lt;/g&gt;
     - (old) Systems used to manipulate/process spatial data (**1980's**)
     
     - 1990's: rise of user-friendly, **desktop softwares** (ArcGIS, QGIS)
     
-    - &lt;span style="color: rgb(174,77,41)"&gt;Data Science revolution:&lt;/span&gt;  full integration of GIS tools into data-processing pipelines; i.e. computer routines that process (potentially spatial) data in &lt;span style="color: rgb(177,148,40)"&gt;modern languages&lt;/span&gt; (e.g. `R`)
+    - &lt;r&gt;Data Science revolution:&lt;/r&gt;  full integration of GIS tools into data-processing pipelines; i.e. computer routines that process (potentially spatial) data in &lt;y&gt;modern languages&lt;/y&gt; (e.g. `R`)
     
 - **Examples:**
     - Firm processing purchases across branches
@@ -245,7 +250,7 @@ Source: https://www.researchgate.net/figure/A-comparison-of-the-inter-and-intra-
 
 # Why not GIS in desktop, user-friendly, softwares?
 
-Require human interaction (e.g. clicking, moving files) to &lt;span style="color: rgb(0,130,155)"&gt;structure spatial data&lt;/span&gt;.
+Require human interaction (e.g. clicking, moving files) to &lt;g&gt;structure spatial data&lt;/g&gt;.
 
 .pull-left[
 .center[**GIS in 1980's:**
@@ -275,7 +280,7 @@ class: inverse, center, middle
   
   - GIS tools: manipulating spatial data to the required structure
   
-- &lt;span style="color: rgb(174,77,41)"&gt;Applications in economic research:&lt;/span&gt;
+- &lt;r&gt;Applications in economic research:&lt;/r&gt;
   - Cholera in London (Snow, 1856)
   
   - Colonial institutions and development in Peru (Dell, 2010)
@@ -302,10 +307,10 @@ class: inverse, center, middle
 
 - Former theory: transmission by air
 
-- John Snow's hypothesis: &lt;span style="color: rgb(0,130,155)"&gt;germ-contaminated water&lt;/span&gt;
+- John Snow's hypothesis: &lt;g&gt;germ-contaminated water&lt;/g&gt;
   - Different rates between locations with different water suppliers
   
-  - Higher rates for those &lt;span style="color: rgb(174,77,41)"&gt;supplied by (polluted) Thames River&lt;/span&gt;
+  - Higher rates for those &lt;r&gt;supplied by (polluted) Thames River&lt;/r&gt;
   
 - Snow's finding: revolution on public sanitation
 
@@ -327,10 +332,10 @@ class: inverse, center, middle
 
 - Workers from high lands (Mita regions): resistent to the harsh mine conditions
 
-- Mita boundaries: regions that &lt;span style="color: rgb(174,77,41)"&gt;provided more/less conscripts&lt;/span&gt; (discontinuously!)
+- Mita boundaries: regions that &lt;r&gt;provided more/less conscripts&lt;/r&gt; (discontinuously!)
   
-- **Dell's findings:** long-lasting &lt;span style="color: rgb(177,148,40)"&gt;development differences&lt;/span&gt;
-  - &lt;span style="color: rgb(0,130,155)"&gt;Economic channels:&lt;/span&gt; land ownership inequality, less public services, ...
+- **Dell's findings:** long-lasting &lt;y&gt;development differences&lt;/y&gt;
+  - &lt;g&gt;Economic channels:&lt;/g&gt; land ownership inequality, less public services, ...
 
 ]
 
@@ -351,10 +356,10 @@ class: inverse, center, middle
 
 - Workers from high lands (Mita regions): resistent to the harsh mine conditions
 
-- Mita boundaries: regions that &lt;span style="color: rgb(174,77,41)"&gt;provided more/less conscripts&lt;/span&gt; (discontinuously!)
+- Mita boundaries: regions that &lt;r&gt;provided more/less conscripts&lt;/r&gt; (discontinuously!)
   
-- **Dell's findings:** long-lasting &lt;span style="color: rgb(177,148,40)"&gt;development differences&lt;/span&gt;
-  - &lt;span style="color: rgb(0,130,155)"&gt;Economic channels:&lt;/span&gt; land ownership inequality, less public services, ...
+- **Dell's findings:** long-lasting &lt;y&gt;development differences&lt;/y&gt;
+  - &lt;g&gt;Economic channels:&lt;/g&gt; land ownership inequality, less public services, ...
 
 ]
 
@@ -372,13 +377,13 @@ class: inverse, center, middle
 .pull-right[
 - Vast **expansion of railroad network** in British colonial India
 
-- Standard trade theory: &lt;span style="color: rgb(0,130,155)"&gt;welfare gains from market integration&lt;/span&gt;
+- Standard trade theory: &lt;g&gt;welfare gains from market integration&lt;/g&gt;
   - Lack of evidence within countries
 
 - **Donaldson's findings:** improved trade conditions increased welfare
-  - &lt;span style="color: rgb(177,148,40)"&gt;Integrated remote areas&lt;/span&gt; (reduced price gaps, more trade flows)
+  - &lt;y&gt;Integrated remote areas&lt;/y&gt; (reduced price gaps, more trade flows)
   
-  - &lt;span style="color: rgb(174,77,41)"&gt;Welfare gains&lt;/span&gt; (real income) from intraregional trade
+  - &lt;r&gt;Welfare gains&lt;/r&gt; (real income) from intraregional trade
 
  
 
@@ -398,14 +403,14 @@ class: inverse, center, middle
 .pull-right[
 - **Increased dryness in Africa** (worse conditions for agriculture)
 
-- Question: do agents in affected rural regions &lt;span style="color: rgb(0,130,155)"&gt;migrate to cities?&lt;/span&gt;
+- Question: do agents in affected rural regions &lt;g&gt;migrate to cities?&lt;/g&gt;
 
-- **Henderson et al.'s findings:** depends on &lt;span style="color: rgb(174,77,41)"&gt;industry composition of cities&lt;/span&gt;
+- **Henderson et al.'s findings:** depends on &lt;r&gt;industry composition of cities&lt;/r&gt;
   - Increased size (**nightlights**) in manufacturing, exporting cities
   
   - Opposite evidence for market towns (service providers to agriculture)
   
-  - Importance of &lt;span style="color: rgb(177,148,40)"&gt;structural change!&lt;/span&gt;
+  - Importance of &lt;y&gt;structural change!&lt;/y&gt;
 ]
 
 
@@ -424,14 +429,14 @@ class: inverse, center, middle
 .pull-right[
 - **Increased dryness in Africa** (worse conditions for agriculture)
 
-- Question: do agents in affected rural regions &lt;span style="color: rgb(0,130,155)"&gt;migrate to cities?&lt;/span&gt;
+- Question: do agents in affected rural regions &lt;g&gt;migrate to cities?&lt;/g&gt;
 
-- **Henderson et al.'s findings:** depends on &lt;span style="color: rgb(174,77,41)"&gt;industry composition of cities&lt;/span&gt;
+- **Henderson et al.'s findings:** depends on &lt;r&gt;industry composition of cities&lt;/r&gt;
   - Increased size (**nightlights**) in manufacturing, exporting cities
   
   - Opposite evidence for market towns (service providers to agriculture)
   
-  - Importance of &lt;span style="color: rgb(177,148,40)"&gt;structural change!&lt;/span&gt;
+  - Importance of &lt;y&gt;structural change!&lt;/y&gt;
 
 ]
 
@@ -450,14 +455,14 @@ class: inverse, center, middle
 .pull-right[
 - **Increased dryness in Africa** (worse conditions for agriculture)
 
-- Question: do agents in affected rural regions &lt;span style="color: rgb(0,130,155)"&gt;migrate to cities?&lt;/span&gt;
+- Question: do agents in affected rural regions &lt;g&gt;migrate to cities?&lt;/g&gt;
 
-- **Henderson et al.'s findings:** depends on &lt;span style="color: rgb(174,77,41)"&gt;industry composition of cities&lt;/span&gt;
+- **Henderson et al.'s findings:** depends on &lt;r&gt;industry composition of cities&lt;/r&gt;
   - Increased size (**nightlights**) in manufacturing, exporting cities
   
   - Opposite evidence for market towns (service providers to agriculture)
   
-  - Importance of &lt;span style="color: rgb(177,148,40)"&gt;structural change!&lt;/span&gt;
+  - Importance of &lt;y&gt;structural change!&lt;/y&gt;
 
 ]
 
@@ -475,12 +480,12 @@ class: inverse, center, middle
 .pull-right[
 - **ESG =** Environment, Social, and Government- related risks
 
-- Question: how to assess &lt;span style="color: rgb(0,130,155)"&gt;asset exposure&lt;/span&gt; to ESG-related risks?
+- Question: how to assess &lt;g&gt;asset exposure&lt;/g&gt; to ESG-related risks?
 
-- **Business product:** Management tool for &lt;span style="color: rgb(174,77,41)"&gt;climate risks&lt;/span&gt; and advanced analytics
+- **Business product:** Management tool for &lt;r&gt;climate risks&lt;/r&gt; and advanced analytics
   - Balance sheet data (assets) + macro model (transition scenarios)
   
-  - Asset exposure: location + &lt;span style="color: rgb(177,148,40)"&gt;**climate risk data**&lt;/span&gt;
+  - Asset exposure: location + &lt;y&gt;**climate risk data**&lt;/y&gt;
   
   - Link &lt;u&gt;[here](https://www.dropbox.com/scl/fi/3nkieje7n4aj8qjm2h9wp/prometeia_report.pdf?rlkey=tr4h4m9ub9yjz10b2nhfzav0i&amp;raw=1)
 
@@ -501,12 +506,12 @@ class: inverse, center, middle
 .pull-right[
 - **ESG =** Environment, Social, and Government- related risks
 
-- Question: how to assess &lt;span style="color: rgb(0,130,155)"&gt;asset exposure&lt;/span&gt; to ESG-related risks?
+- Question: how to assess &lt;g&gt;asset exposure&lt;/g&gt; to ESG-related risks?
 
-- **Business product:** Management tool for &lt;span style="color: rgb(174,77,41)"&gt;climate risks&lt;/span&gt; and advanced analytics
+- **Business product:** Management tool for &lt;r&gt;climate risks&lt;/r&gt; and advanced analytics
   - Balance sheet data (assets) + macro model (transition scenarios)
   
-  - Asset exposure: location + &lt;span style="color: rgb(177,148,40)"&gt;**climate risk data**&lt;/span&gt;
+  - Asset exposure: location + &lt;y&gt;**climate risk data**&lt;/y&gt;
   
   - Link &lt;u&gt;[here](https://www.dropbox.com/scl/fi/3nkieje7n4aj8qjm2h9wp/prometeia_report.pdf?rlkey=tr4h4m9ub9yjz10b2nhfzav0i&amp;raw=1)
 
@@ -527,12 +532,12 @@ class: inverse, center, middle
 .pull-right[
 - **ESG =** Environment, Social, and Government- related risks
 
-- Question: how to assess &lt;span style="color: rgb(0,130,155)"&gt;asset exposure&lt;/span&gt; to ESG-related risks?
+- Question: how to assess &lt;g&gt;asset exposure&lt;/g&gt; to ESG-related risks?
 
-- **Business product:** Management tool for &lt;span style="color: rgb(174,77,41)"&gt;climate risks&lt;/span&gt; and advanced analytics
+- **Business product:** Management tool for &lt;r&gt;climate risks&lt;/r&gt; and advanced analytics
   - Balance sheet data (assets) + macro model (transition scenarios)
   
-  - Asset exposure: location + &lt;span style="color: rgb(177,148,40)"&gt;**climate risk data**&lt;/span&gt;
+  - Asset exposure: location + &lt;y&gt;**climate risk data**&lt;/y&gt;
   
   - Link &lt;u&gt;[here](https://www.dropbox.com/scl/fi/3nkieje7n4aj8qjm2h9wp/prometeia_report.pdf?rlkey=tr4h4m9ub9yjz10b2nhfzav0i&amp;raw=1)
 
@@ -551,31 +556,223 @@ class: inverse, center, middle
 - What is `R`? 
   - Computer language for statistical computing and graphics
   
-  - Open source, &lt;span style="color: rgb(0,130,155)"&gt;free access&lt;/span&gt;
+  - Open source, &lt;g&gt;free access&lt;/g&gt;
   
   - Developers' community (CRAN)
-      - Development of **libraries** (packages) for &lt;span style="color: rgb(174,77,41)"&gt;specific applications&lt;/span&gt;
+      - Development of **libraries** (packages) for &lt;r&gt;specific applications&lt;/r&gt;
     
 - `RStudio`: integrated development environment (IDE)
-  - &lt;span style="color: rgb(177,148,40)"&gt;User-friendlier environment&lt;/span&gt; to work with `R`
+  - &lt;y&gt;User-friendlier environment&lt;/y&gt; to work with `R`
   
 ---
 
 # Working with data (including spatial) in R
 
-- Data work in `R`: one of its &lt;span style="color: rgb(0,130,155)"&gt;many capabilities&lt;/span&gt;
+- Data work in `R`: one of its &lt;g&gt;many capabilities&lt;/g&gt;
   - Producing documents, slides, or webpages
   
 - **Our approach:**
-  1. &lt;span style="color: rgb(0,130,155)"&gt;Basic programming and data work&lt;/span&gt; in `R` `\(\rightarrow\)` **content of today!**
+  1. &lt;g&gt;Basic programming and data work&lt;/g&gt; in `R` `\(\rightarrow\)` **content of today!**
   
   2. Working with spatial data in `R` (GIS tools)
   
-- Important: &lt;span style="color: rgb(174,77,41)"&gt;focus on basics&lt;/span&gt;
+- Important: &lt;r&gt;focus on basics&lt;/r&gt;
   - Introduction of basic concepts/tools rather than a presentation of **all possible** functions
   
   - Every spatial data application is a challenge on its own
-      - The goal is to introduce the basics so that you can apply (and improve) them on &lt;span style="color: rgb(177,148,40)"&gt;your own application!&lt;/span&gt;
+      - The goal is to introduce the basics so that you can apply (and improve) them on &lt;y&gt;your own application!&lt;/y&gt;
+
+---
+class: inverse, center, middle
+
+
+# Spatial Data with R: what have previous
+
+# students learned and done?
+
+---
+
+# Spatial Data with R: examples from previous years
+
+- **Final projects** from past years: illustrate the course's &lt;r&gt;potential for practical applications&lt;/r&gt;
+
+  - Potentials for electricity interconnection in the USA (EECC)
+  
+  - Anti-drought policies and natural conservation in Catalunya (EPP+DSDM)
+  
+  - Risk profile of NBA teams and players (DSDM+DSM+ECON)
+  
+  - Many others (CRM+ECON, ...)
+
+&lt;br&gt;
+  
+--
+
+Note the **&lt;y&gt;multi-program feature of projects&lt;/y&gt;** (richness and variety of students and ideas!)
+
+---
+
+# Example 01: Cost-benefits of connecting eletricity markets
+
+
+.pull-left[
+.center[
+&lt;img src="figs/proj1_1.png" style="width: 70%" /&gt;
+]
+]
+
+.pull-right[
+US geography: `\(\neq\)` **green energy potentials**
+
+- Connecting to urban/production centers &lt;r&gt;is costly&lt;/r&gt;
+  
+- Which are the high-potentials regions for renewable investments?
+
+Data: &lt;g&gt;Solar radiation + wind speed = LCOE&lt;/g&gt;
+
+- High potentials (and benefits if connecting) Texas' market
+
+- Experiment with `\(\neq\)` **&lt;y&gt;transmission lines&lt;/y&gt;**
+
+]
+
+---
+
+# Example 01: Cost-benefits of connecting eletricity markets
+
+
+.pull-left[
+.center[
+&lt;img src="figs/proj1_2.png" style="width: 90%" /&gt;
+]
+]
+
+.pull-right[
+US geography: `\(\neq\)` **green energy potentials**
+
+- Connecting to urban/production centers &lt;r&gt;is costly&lt;/r&gt;
+  
+- Which are the high-potentials regions for renewable investments?
+
+Data: &lt;g&gt;Solar radiation + wind speed = LCOE&lt;/g&gt;
+
+- High potentials (and benefits if connecting) Texas' market
+
+- Experiment with `\(\neq\)` **&lt;y&gt;transmission lines&lt;/y&gt;**
+
+]
+
+---
+
+# Example 01: Cost-benefits of connecting eletricity markets
+
+.center[
+&lt;img src="figs/proj1_3.png" style="width: 70%" /&gt;
+]
+
+---
+
+# Example 02: Effectiveness of anti-drought policies
+
+
+.pull-left[
+**Severe drought in Catalunya** (2004-2008)
+
+- Strict emergency measures for efficient water usage in 2007
+
+- Did that `\(\downarrow\)` water pumping and vegetation depletion?
+
+&lt;g&gt;Spatial data + RD Design&lt;/g&gt; = causal effects
+
+- Comparison between CAT (treated) and Aragón (control)
+
+- Neat example of &lt;y&gt;policy evaluation&lt;/y&gt; project!
+
+]
+
+.pull-right[
+.center[
+&lt;img src="figs/proj2_1.png" style="width: 100%" /&gt;
+]
+]
+
+---
+
+# Example 02: Effectiveness of anti-drought policies
+
+.center[
+&lt;img src="figs/proj2_2.png" style="width: 80%" /&gt;
+]
+
+---
+
+# Example 02: Effectiveness of anti-drought policies
+
+.center[
+&lt;img src="figs/proj2_3.png" style="width: 80%" /&gt;
+]
+
+---
+
+# Example 03: Risk profile of NBA teams and players
+
+
+.pull-left[
+.center[
+&lt;img src="figs/proj3_1.png" style="width: 100%" /&gt;
+]
+]
+
+.pull-right[
+
+**NBA scoring:** security-risk trade off
+
+- 3-points shots: high return/risk
+
+- NBA team shooting profile `\(\equiv\)` &lt;g&gt;risky portfolio&lt;/g&gt;
+
+Have NBA teams become &lt;r&gt;more risk-takers&lt;/r&gt; over time?
+
+- Data: players' position, shooting, and efficiency
+
+- `\(\uparrow\)` risk taken (led by &lt;y&gt;individual players&lt;/y&gt;)
+
+]
+
+---
+
+# Example 03: Risk profile of NBA teams and players
+
+.center[
+&lt;img src="figs/proj3_2.png" style="width: 70%" /&gt;
+]
+
+---
+
+# Example 03: Risk profile of NBA teams and players
+
+.center[
+&lt;img src="figs/proj3_3.png" style="width: 70%" /&gt;
+]
+
+---
+
+# Example 03: Risk profile of NBA teams and players
+
+.center[
+&lt;img src="figs/proj3_4.png" style="width: 45%" /&gt;
+&lt;img src="figs/proj3_5.png" style="width: 45%" /&gt;
+]
+
+---
+
+# Example 03: Risk profile of NBA teams and players
+
+.center[
+&lt;img src="figs/proj3_6.png" style="width: 100%" /&gt;
+]
+
+Creativity + spatial data skills = &lt;u&gt;interesting research question!&lt;/u&gt; **&lt;r&gt;Are you up for it?&lt;/r&gt;**
 
 ---
 class: inverse, center, middle
@@ -587,16 +784,16 @@ class: inverse, center, middle
 
 # Basics of programming and data work in R
 
-Open `01_class01.R` on your own computer, where we will cover the following topics. The subsequent slides here are for &lt;span style="color: rgb(0,130,155)"&gt;reference only&lt;/span&gt;.
+Open `01_class01.R` on your own computer, where we will cover the following topics. The subsequent slides here are for &lt;g&gt;reference only&lt;/g&gt;.
 
 .pull-left[
 - **Concepts covered:**
   1. `R` basics: environment, main elements (vectors, lists, `data.frame`), libraries
   
-  2. Basic &lt;span style="color: rgb(174,77,41)"&gt;data wrangling&lt;/span&gt; with ``dplyr``
+  2. Basic &lt;r&gt;data wrangling&lt;/r&gt; with ``dplyr``
       - Filtering, mutating, merging
   
-  3. &lt;span style="color: rgb(0,130,155)"&gt;Data visualization&lt;/span&gt; with `ggplot2`
+  3. &lt;g&gt;Data visualization&lt;/g&gt; with `ggplot2`
 ]
 
 .pull-right[
@@ -630,7 +827,7 @@ getwd() # tells you the current wd
 ```
 
 ```
-## [1] "/Users/brunoconteleite/Dropbox/Teaching/08-geospatial-ds-bse"
+## [1] "/Users/bruno/Dropbox/Teaching/08-geospatial-ds-bse"
 ```
 
 - Types of elements in `R` environment:
@@ -645,7 +842,7 @@ getwd() # tells you the current wd
 - **Data wrangling:** manipulating raw data with `dplyr`
   - Creating new variables, filtering datasets, arranging, merging, reshaping
   
-- &lt;span style="color: rgb(0,130,155)"&gt;Pipe syntax:&lt;/span&gt; uses `%&gt;%` operator. Example if merging datasets:
+- &lt;g&gt;Pipe syntax:&lt;/g&gt; uses `%&gt;%` operator. Example if merging datasets:
 
 ```r
 df &lt;- merge.data.table(a,b,by = 'Month') # is equivalent to:
@@ -661,19 +858,18 @@ df &lt;- a %&gt;%
 
 # Basics of programming and data work in R (3/3)
 
-- **Data visualization** in `R` with `ggplot()`. Syntax that maps &lt;span style="color: rgb(0,130,155)"&gt;data&lt;/span&gt; `\(\rightarrow\)` &lt;span style="color: rgb(174,77,41)"&gt;geometry&lt;/span&gt; `\(\rightarrow\)` &lt;span style="color: rgb(177,148,40)"&gt;visuals&lt;/span&gt;
+- **Data visualization** in `R` with `ggplot()`. Syntax that maps &lt;g&gt;data&lt;/g&gt; `\(\rightarrow\)` &lt;r&gt;geometry&lt;/r&gt; `\(\rightarrow\)` &lt;y&gt;visuals&lt;/y&gt;
 
 
 .pull-left[
 
 ```r
-library(ggplot2)
-try( # ignore this
+library(ggplot2) # load library
+# Standard syntax:
 p &lt;- ggplot(data = data) +
   geom_GEOM(mapping = aes(MAPPINGS)) +
   THEME()
-)
-# Example
+# Example:
 p &lt;- ggplot(data = airquality) +
   geom_point(mapping = aes(Wind,Temp, color = Month)) +
   theme_bw()

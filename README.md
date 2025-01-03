@@ -30,7 +30,7 @@ This is a 20 hours course, divided in ten sessions of 2 hours each. Its overall 
 
   * Basic aspects of `R` (`tidyverse`, `ggplot2`), spatial data, and applications in economic research
   
-  * Class slides **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class01.html)** and hands-on material **[here]()**
+  * Class slides **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class01.html)** and hands-on material **[here](https://www.dropbox.com/scl/fi/973hbquayt7v8jfd85qaa/01_class01.R?rlkey=85y5cbp2bkd1jrt9e2q1uynrp&st=f7frq3x7&dl=1)**
 
 * **Session 2:** Vector spatial data (points, lines, and polygons)
   * Creating, loading, and manipulating vector data with ``sf``
