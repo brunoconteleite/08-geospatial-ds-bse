@@ -36,7 +36,7 @@ This is a 20 hours course, divided in ten sessions of 2 hours each. Its overall 
   * Creating, loading, and manipulating vector data with ``sf``
   * Spatial (re)projections and basic data  visualization with ``ggplot2``
   
-  * **Class slides** **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class02.html)** and hands-on material **[here]()**
+  * **Class slides** **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class02.html)** and hands-on material **[here](https://www.dropbox.com/scl/fi/y5eofzitrbvr84sity8z8/01_class02.R?rlkey=xl3lcrl9mq8tg80xfk4kuw5ss&st=kjqjmw9d&dl=1)**
 
 * **Session 3:** Attribute- and spatial-based operations with vector data
   * Operations with vector data: attribute-based (e.g. ``filter()``, ``slice()``) and spatial-based (e.g. ``st_intersects()``, ``st_overlaps()``, ``st_touches()``, ``st_join()``, ``aggregate()``)
