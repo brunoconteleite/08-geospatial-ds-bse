@@ -41,7 +41,7 @@ This is a 20 hours course, divided in ten sessions of 2 hours each. Its overall 
 * **Session 3:** Attribute- and spatial-based operations with vector data
   * Operations with vector data: attribute-based (e.g. ``filter()``, ``slice()``) and spatial-based (e.g. ``st_intersects()``, ``st_overlaps()``, ``st_touches()``, ``st_join()``, ``aggregate()``)
   
-  * **Class slides** **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class03.html)** and hands-on material **[here]()**
+  * **Class slides** **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class03.html)** and hands-on material **[here](https://www.dropbox.com/scl/fi/y65fnibf31pizsd0mm8y0/01_class03.R?rlkey=n76yl7pf3g0wo5l28983181ui&st=hs17voyh&dl=1)**
   
   * *Assignment:* reproducing operations with proposed data and replicating results from academic papers. Instructions **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class03.html#20)**
   
