@@ -49,11 +49,11 @@ This is a 20 hours course, divided in ten sessions of 2 hours each. Its overall 
   * Unary operations (e.g., simplification, centroids, buffers, casting)
   * Binary operations (e.g., clipping, subsetting, calculating distances)
   
-  * **Class slides** **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class04.html)** and hands-on material **[here]()**
+  * **Class slides** **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class04.html)** and hands-on material **[here](https://www.dropbox.com/scl/fi/79bp963jvk4ou13h7zt6p/01_class04.R?rlkey=u90ul5z2uk0o96jtih3xdwlvv&st=j70nyti2&dl=1)**
   
   * *Class follow-up:* feedback on course pace, reinforcing concepts, etc.
   
-  * *Assignment:* Produce maps and statistics (histograms, correlations) with real-world spatial data. Instructions **[html](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class04.html#21)**
+  * *Assignment:* Produce maps and statistics (histograms, correlations) with real-world spatial data. Instructions **[html](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class04.html#18)**
   
 #### Part 2: Raster (image) data and interactive data visualization
 
