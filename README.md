@@ -65,7 +65,7 @@ This is a 20 hours course, divided in ten sessions of 2 hours each. Its overall 
   
   * Unary raster operations (e.g. ``crop`` and ``vectorize``)
   
-  * **Class slides** **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class05.html)** and hands-on material **[here]()**
+  * **Class slides** **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class05.html)** and hands-on material **[here](https://www.dropbox.com/scl/fi/9jt29xa0501l40g7jkz2a/01_class05.R?rlkey=k4w9r5nvtwxb82dzyygzcdmku&st=fv45n2bn&dl=1)**
   
 * **Session 6:** Raster-vector operations
   
