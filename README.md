@@ -79,9 +79,9 @@ This is a 20 hours course, divided in ten sessions of 2 hours each. Its overall 
   
 * **Session 7:** Interactive tools
   
-  * Basic of interactive dashboards using `leaflet`
+  * Basic of interactive dashboards using `leaflet` + APIs
   
-  * **Class slides** **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class07.html)** and hands-on material **[here]()**
+  * **Class slides** **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class07.html)** and hands-on material **[here](https://www.dropbox.com/scl/fi/hvhl89opousx5um91e1br/01_class07.R?rlkey=aypx3tlji3ce7n50v4i242g1d&st=kas6zi0d&dl=1)**
   
 #### Part 3: Spatial models in economics and real-world applications
 
