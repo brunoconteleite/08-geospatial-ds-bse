@@ -91,15 +91,15 @@ This is a 20 hours course, divided in ten sessions of 2 hours each. Its overall 
   
   * **Class slides** **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class08.html)** and hands-on material **[here]()**
   
-* **Session 9:** Geospatial data with spatial models: optimal worker commuting choices within a city
+* **Session 9:** Linking models to (spatial) data
   
-  * Conceptual and practical issues when linking real-world (geospatial) data to a location commuting choice (spatial) model
+  * Conceptual and practical issues when linking real-world (geospatial) data to a spatial model of migration
   
   * **Class slides** **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class09.html)** and hands-on material **[here]()**
   
-* **Session 10:** Geospatial data with spatial models: optimal shopping choices of consumers
+* **Session 10:** Models, data, and counterfactual simulations
   
-  * Combining a shopping (spatial) model with geospatial data to conduct counterfactual experiments
+  * Applications of spatial models (combined with spatial data) when answering counterfactual questions
   
   * **Class slides** **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class10.html)** and hands-on material **[here]()**
 
