@@ -30,18 +30,18 @@ This is a 20 hours course, divided in ten sessions of 2 hours each. Its overall 
 
   * Basic aspects of `R` (`tidyverse`, `ggplot2`), spatial data, and applications in economic research
   
-  * Class slides **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class01.html)** and hands-on material **[here](https://www.dropbox.com/scl/fi/973hbquayt7v8jfd85qaa/01_class01.R?rlkey=85y5cbp2bkd1jrt9e2q1uynrp&st=f7frq3x7&dl=1)**
+  * Class slides **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class01.html)** and hands-on material **[here]()**
 
 * **Session 2:** Vector spatial data (points, lines, and polygons)
   * Creating, loading, and manipulating vector data with ``sf``
   * Spatial (re)projections and basic data  visualization with ``ggplot2``
   
-  * **Class slides** **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class02.html)** and hands-on material **[here](https://www.dropbox.com/scl/fi/y5eofzitrbvr84sity8z8/01_class02.R?rlkey=xl3lcrl9mq8tg80xfk4kuw5ss&st=kjqjmw9d&dl=1)**
+  * **Class slides** **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class02.html)** and hands-on material **[here]()**
 
 * **Session 3:** Attribute- and spatial-based operations with vector data
   * Operations with vector data: attribute-based (e.g. ``filter()``, ``slice()``) and spatial-based (e.g. ``st_intersects()``, ``st_overlaps()``, ``st_touches()``, ``st_join()``, ``aggregate()``)
   
-  * **Class slides** **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class03.html)** and hands-on material **[here](https://www.dropbox.com/scl/fi/y65fnibf31pizsd0mm8y0/01_class03.R?rlkey=n76yl7pf3g0wo5l28983181ui&st=hs17voyh&dl=1)**
+  * **Class slides** **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class03.html)** and hands-on material **[here]()**
   
   * *Assignment:* reproducing operations with proposed data and replicating results from academic papers. Instructions **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class03.html#20)**
   
@@ -49,7 +49,7 @@ This is a 20 hours course, divided in ten sessions of 2 hours each. Its overall 
   * Unary operations (e.g., simplification, centroids, buffers, casting)
   * Binary operations (e.g., clipping, subsetting, calculating distances)
   
-  * **Class slides** **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class04.html)** and hands-on material **[here](https://www.dropbox.com/scl/fi/79bp963jvk4ou13h7zt6p/01_class04.R?rlkey=u90ul5z2uk0o96jtih3xdwlvv&st=j70nyti2&dl=1)**
+  * **Class slides** **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class04.html)** and hands-on material **[here]()**
   
   * *Class follow-up:* feedback on course pace, reinforcing concepts, etc.
   
@@ -65,7 +65,7 @@ This is a 20 hours course, divided in ten sessions of 2 hours each. Its overall 
   
   * Unary raster operations (e.g. ``crop`` and ``vectorize``)
   
-  * **Class slides** **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class05.html)** and hands-on material **[here](https://www.dropbox.com/scl/fi/9jt29xa0501l40g7jkz2a/01_class05.R?rlkey=k4w9r5nvtwxb82dzyygzcdmku&st=fv45n2bn&dl=1)**
+  * **Class slides** **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class05.html)** and hands-on material **[here]()**
   
 * **Session 6:** Raster-vector operations
   
@@ -75,13 +75,13 @@ This is a 20 hours course, divided in ten sessions of 2 hours each. Its overall 
   
   * Unary raster operations (e.g. ``crop`` and ``vectorize``)
   
-  * **Class slides** **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class06.html)** and hands-on material **[here](https://www.dropbox.com/scl/fi/qrkf6z4tc0zpfgwgmkofz/01_class06.R?rlkey=nlm9qro5s5j9dstqo9f1qj4mb&st=qsh39lun&dl=1)**
+  * **Class slides** **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class06.html)** and hands-on material **[here]()**
   
 * **Session 7:** Interactive tools
   
   * Basic of interactive dashboards using `leaflet` + APIs
   
-  * **Class slides** **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class07.html)** and hands-on material **[here](https://www.dropbox.com/scl/fi/hvhl89opousx5um91e1br/01_class07.R?rlkey=aypx3tlji3ce7n50v4i242g1d&st=kas6zi0d&dl=1)**
+  * **Class slides** **[here](https://brunoconteleite.github.io/08-geospatial-ds-bse/00_class07.html)** and hands-on material **[here]()**
   
 #### Part 3: Spatial models in economics and real-world applications
 
