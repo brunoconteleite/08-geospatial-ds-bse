@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Lecture 03</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Bruno Conte" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer-bse.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+&lt;!-- class: inverse, center, title-slide, middle --&gt;
+class: center, middle
+
+&lt;style&gt;
+g { color: rgb(0,130,155) }
+r { color: rgb(174,77,41) }
+y { color: rgb(177,148,40) }
+&lt;/style&gt;
+
+
+# Lecture 03: Geospatial Data Sciences
+
+# and Economic Spatial Models
+
+## &lt;img src="figs/bse_primary_logo.png" style="width: 35%" /&gt;&lt;br&gt;&lt;br&gt;Bruno Conte
+
+## 21-22/Jan/2026
+
+---
+
+# Geospatial Data and Spatial Models: Schedule
+
+1. ~~Introduction to (spatial) data and programming in `R`~~ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[08/Jan/2026]**
+
+2. Week 2-4: Vector spatial data &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[14 - 29/Jan/2026]**
+    - ~~Week 2: Introduction and basics of vector data using `sf`~~
+    - Week 3: Vector data operations: attribute- and spatial-based
+    - Week 4: Geometry-based operations (or transformations)
+
+3. Week 5-7: Raster spatial data + (basic) interactive tools &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[05 - 19/Feb/2026]**
+
+4. Week 8-10: Spatial models and applications with data &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[25/Feb - 12 Mar/2026]**&lt;br&gt; &lt;br&gt;
+
+5. &lt;span style="color: rgb(177,148,40)"&gt;Take-home exam&lt;/span&gt; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; **[27/Mar/2026]**
+
+---
+
+# Main references for this class
+
+1. Lovelace, R., Nowosad, J. and Muenchow, J., 2019. &lt;span style="color: rgb(0,130,155)"&gt;**Geocomputation with R.**&lt;/span&gt; Chapman and Hall/CRC.
+  - Chapter 3.2 (attribute data operations)
+  - Chapter 4 (spatial data operations)
+
+2. Pebesma, E., 2018. Simple Features for R: Standardized Support for Spatial Vector Data. The R Journal 10 (1), 439-446
+
+3. Wickham, H. and Grolemund, G., 2016. R for data science: import, tidy, transform, visualize, and model data. " O'Reilly Media, Inc.".
+
+---
+
+# Vector data operations: attribute and spatial
+
+- &lt;span style="color: rgb(0,130,155)"&gt;Data operations:&lt;/span&gt; manipulation of vector data (in terms of geometry and attribute structure). Basic operations are:
+  - **Selecting:** restricting the fields (i.e. variables = columns) of a `sf`
+  
+  - **Slicing:** restricting the features (i.e. observations = rows) of a `sf`
+  
+  - **Filtering:** restricting based on data attributes
+  
+  - **Joining/merging:** linking attributes (i.e. data) between different `sf` (or data sets)
+  
+  - **Aggregating:** processing attributes (i.e. data) within a `sf` based on some fields
+
+- Operations can be &lt;span style="color: rgb(174,77,41)"&gt;either attribute- or spatial-based&lt;/span&gt;
+
+---
+
+# Attribute data operations: selecting (choose fields)
+
+
+```r
+*world
+```
+
+```
+## Simple feature collection with 177 features and 10 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -180 ymin: -90 xmax: 180 ymax: 83.64513
+## Geodetic CRS:  WGS 84
+## # A tibble: 177 × 11
+##    iso_a2 name_long      conti…¹ regio…² subre…³ type  area_…⁴     pop
+##    &lt;chr&gt;  &lt;chr&gt;          &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+##  1 FJ     Fiji           Oceania Oceania Melane… Sove…  1.93e4  8.86e5
+##  2 TZ     Tanzania       Africa  Africa  Easter… Sove…  9.33e5  5.22e7
+##  3 EH     Western Sahara Africa  Africa  Northe… Inde…  9.63e4 NA     
+##  4 CA     Canada         North … Americ… Northe… Sove…  1.00e7  3.55e7
+##  5 US     United States  North … Americ… Northe… Coun…  9.51e6  3.19e8
+##  6 KZ     Kazakhstan     Asia    Asia    Centra… Sove…  2.73e6  1.73e7
+##  7 UZ     Uzbekistan     Asia    Asia    Centra… Sove…  4.61e5  3.08e7
+##  8 PG     Papua New Gui… Oceania Oceania Melane… Sove…  4.65e5  7.76e6
+##  9 ID     Indonesia      Asia    Asia    South-… Sove…  1.82e6  2.55e8
+## 10 AR     Argentina      South … Americ… South … Sove…  2.78e6  4.30e7
+## # … with 167 more rows, 3 more variables: lifeExp &lt;dbl&gt;,
+## #   gdpPercap &lt;dbl&gt;, geom &lt;MULTIPOLYGON [°]&gt;, and abbreviated
+## #   variable names ¹​continent, ²​region_un, ³​subregion, ⁴​area_km2
+```
+
+]
+
+---
+counter: false
+
+# Attribute data operations: selecting (choose fields)
+
+
+```r
+*world %&gt;% select(name_long, continent)
+```
+
+```
+## Simple feature collection with 177 features and 2 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -180 ymin: -90 xmax: 180 ymax: 83.64513
+## Geodetic CRS:  WGS 84
+## # A tibble: 177 × 3
+##    name_long        continent                                     geom
+##    &lt;chr&gt;            &lt;chr&gt;                           &lt;MULTIPOLYGON [°]&gt;
+##  1 Fiji             Oceania       (((180 -16.06713, 180 -16.55522, 17…
+##  2 Tanzania         Africa        (((33.90371 -0.95, 34.07262 -1.0598…
+##  3 Western Sahara   Africa        (((-8.66559 27.65643, -8.665124 27.…
+##  4 Canada           North America (((-122.84 49, -122.9742 49.00254, …
+##  5 United States    North America (((-122.84 49, -120 49, -117.0312 4…
+##  6 Kazakhstan       Asia          (((87.35997 49.21498, 86.59878 48.5…
+##  7 Uzbekistan       Asia          (((55.96819 41.30864, 55.92892 44.9…
+##  8 Papua New Guinea Oceania       (((141.0002 -2.600151, 142.7352 -3.…
+##  9 Indonesia        Asia          (((141.0002 -2.600151, 141.0171 -5.…
+## 10 Argentina        South America (((-68.63401 -52.63637, -68.25 -53.…
+## # … with 167 more rows
+```
+
+---
+
+# Attribute data operations: slicing (choose observations)
+
+
+```r
+*world %&gt;% select(name_long, continent) %&gt;% slice(1:2)
+```
+
+```
+## Simple feature collection with 2 features and 2 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -180 ymin: -18.28799 xmax: 180 ymax: -0.95
+## Geodetic CRS:  WGS 84
+## # A tibble: 2 × 3
+##   name_long continent                                             geom
+##   &lt;chr&gt;     &lt;chr&gt;                                   &lt;MULTIPOLYGON [°]&gt;
+## 1 Fiji      Oceania   (((180 -16.06713, 180 -16.55522, 179.3641 -16.8…
+## 2 Tanzania  Africa    (((33.90371 -0.95, 34.07262 -1.05982, 37.69869 …
+```
+
+---
+
+# Attribute data operations: filtering (based on data)
+
+
+```r
+*world %&gt;% select(name_long, continent) %&gt;% filter(continent=='South America')
+```
+
+```
+## Simple feature collection with 13 features and 2 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -81.41094 ymin: -55.61183 xmax: -34.72999 ymax: 12.4373
+## Geodetic CRS:  WGS 84
+## # A tibble: 13 × 3
+##    name_long        continent                                     geom
+##  * &lt;chr&gt;            &lt;chr&gt;                           &lt;MULTIPOLYGON [°]&gt;
+##  1 Argentina        South America (((-68.63401 -52.63637, -68.25 -53.…
+##  2 Chile            South America (((-68.63401 -52.63637, -68.63335 -…
+##  3 Falkland Islands South America (((-61.2 -51.85, -60 -51.25, -59.15…
+##  4 Uruguay          South America (((-57.62513 -30.21629, -56.97603 -…
+##  5 Brazil           South America (((-53.37366 -33.76838, -53.65054 -…
+##  6 Bolivia          South America (((-69.52968 -10.95173, -68.78616 -…
+##  7 Peru             South America (((-69.89364 -4.298187, -70.79477 -…
+##  8 Colombia         South America (((-66.87633 1.253361, -67.06505 1.…
+##  9 Venezuela        South America (((-60.73357 5.200277, -60.60118 4.…
+## 10 Guyana           South America (((-56.53939 1.899523, -56.7827 1.8…
+## 11 Suriname         South America (((-54.52475 2.311849, -55.09759 2.…
+## 12 Ecuador          South America (((-75.37322 -0.1520318, -75.23372 …
+## 13 Paraguay         South America (((-58.16639 -20.1767, -57.87067 -2…
+```
+
+---
+
+# Attribute data operations: joining (merging data)
+
+
+```r
+world %&gt;% select(name_long, continent) %&gt;% filter(continent=='South America') %&gt;%
+* left_join(coffee_data) # data of coffee production by country (name_long)
+```
+
+```
+## Simple feature collection with 13 features and 4 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -81.41094 ymin: -55.61183 xmax: -34.72999 ymax: 12.4373
+## Geodetic CRS:  WGS 84
+## # A tibble: 13 × 5
+##    name_long        contin…¹                      geom coffe…² coffe…³
+##    &lt;chr&gt;            &lt;chr&gt;           &lt;MULTIPOLYGON [°]&gt;   &lt;int&gt;   &lt;int&gt;
+##  1 Argentina        South A… (((-68.63401 -52.63637, …      NA      NA
+##  2 Chile            South A… (((-68.63401 -52.63637, …      NA      NA
+##  3 Falkland Islands South A… (((-61.2 -51.85, -60 -51…      NA      NA
+##  4 Uruguay          South A… (((-57.62513 -30.21629, …      NA      NA
+##  5 Brazil           South A… (((-53.37366 -33.76838, …    3277    2786
+##  6 Bolivia          South A… (((-69.52968 -10.95173, …       3       4
+##  7 Peru             South A… (((-69.89364 -4.298187, …     585     625
+##  8 Colombia         South A… (((-66.87633 1.253361, -…    1330    1169
+##  9 Venezuela        South A… (((-60.73357 5.200277, -…      NA      NA
+## 10 Guyana           South A… (((-56.53939 1.899523, -…      NA      NA
+## 11 Suriname         South A… (((-54.52475 2.311849, -…      NA      NA
+## 12 Ecuador          South A… (((-75.37322 -0.1520318,…      87      62
+## 13 Paraguay         South A… (((-58.16639 -20.1767, -…      NA      NA
+## # … with abbreviated variable names ¹​continent,
+## #   ²​coffee_production_2016, ³​coffee_production_2017
+```
+
+---
+
+# Attribute data operations: aggregating (based on attributes)
+
+
+```r
+*world %&gt;% select(name_long, continent, pop)
+```
+
+```
+## Simple feature collection with 177 features and 3 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -180 ymin: -90 xmax: 180 ymax: 83.64513
+## Geodetic CRS:  WGS 84
+## # A tibble: 177 × 4
+##    name_long        continent           pop                       geom
+##    &lt;chr&gt;            &lt;chr&gt;             &lt;dbl&gt;         &lt;MULTIPOLYGON [°]&gt;
+##  1 Fiji             Oceania          885806 (((180 -16.06713, 180 -16…
+##  2 Tanzania         Africa         52234869 (((33.90371 -0.95, 34.072…
+##  3 Western Sahara   Africa               NA (((-8.66559 27.65643, -8.…
+##  4 Canada           North America  35535348 (((-122.84 49, -122.9742 …
+##  5 United States    North America 318622525 (((-122.84 49, -120 49, -…
+##  6 Kazakhstan       Asia           17288285 (((87.35997 49.21498, 86.…
+##  7 Uzbekistan       Asia           30757700 (((55.96819 41.30864, 55.…
+##  8 Papua New Guinea Oceania         7755785 (((141.0002 -2.600151, 14…
+##  9 Indonesia        Asia          255131116 (((141.0002 -2.600151, 14…
+## 10 Argentina        South America  42981515 (((-68.63401 -52.63637, -…
+## # … with 167 more rows
+```
+
+---
+
+
+# Attribute data operations: aggregating (based on attributes)
+
+
+```r
+world %&gt;% select(name_long, continent, pop) %&gt;% 
+* group_by(continent) %&gt;%
+* summarise(total_population = sum(pop, na.rm = T))
+```
+
+```
+## Simple feature collection with 8 features and 2 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -180 ymin: -90 xmax: 180 ymax: 83.64513
+## Geodetic CRS:  WGS 84
+## # A tibble: 8 × 3
+##   continent               total_population                        geom
+##   &lt;chr&gt;                              &lt;dbl&gt;          &lt;MULTIPOLYGON [°]&gt;
+## 1 Africa                        1154946633 (((40.43725 -11.76171, 40.…
+## 2 Antarctica                             0 (((-48.66062 -78.04702, -4…
+## 3 Asia                          4311408059 (((120.295 -10.25865, 118.…
+## 4 Europe                         669036256 (((-53.77852 2.376703, -54…
+## 5 North America                  565028684 (((-78.21494 7.512255, -78…
+## 6 Oceania                         37757833 (((171.9487 -41.51442, 172…
+## 7 Seven seas (open ocean)                0 (((68.935 -48.625, 69.58 -…
+## 8 South America                  412060811 (((-57.75 -51.55, -58.05 -…
+```
+
+---
+
+# Attribute data operations: aggregating (based on attributes)
+
+.pull-left[
+![](figs/class03/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+]
+.pull-right[
+![](figs/class03/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+]
+
+---
+
+# Spatial data operations
+
+- Same intution, but now &lt;span style="color: rgb(0,130,155)"&gt;spatial aspects determine the operations&lt;/span&gt;
+    - Before: based on the underlying attributes
+    
+- Spatial relationship of `sf` objects: determined by different &lt;span style="color: rgb(177,148,40)"&gt;**topological relations**&lt;/span&gt;
+  - Examples: intersection, containing, touching, etc.
+  
+- Intuition (and workflow with data): the same as with attribute data
+
+- **Detailed exposition:** on class material `01_class03.R`
+
+- Next: &lt;span style="color: rgb(174,77,41)"&gt;types&lt;/span&gt; of topological relationships
+
+---
+
+.center[
+&lt;img src="https://r.geocompx.org/figures/relations-1.png" style="width: 75%" /&gt;
+]
+
+---
+
+# Hands-on: your turn! (1/2)
+
+.pull-left[
+* Combine `world` (`sf`) and `worldbank_df` (`data.frame`)
+
+* Filter only countries in America
+
+* Calculate urban rate by `subregion`
+
+* urban rate = urban population/total population
+
+* Plot of Americas by subregions' urban rates:
+]
+
+.pull-right[
+.center[
+&lt;img src="figs/class03/unnamed-chunk-10-1.png" width="85%" /&gt;
+
+]
+]
+
+---
+
+# Hands-on: your turn! (2/2)
+
+.pull-left[
+* Combine `lnd` (Great London) and `cycle_hire` (location of bike stations)
+
+* Filter London regions with bike stations, &lt;span style="color: rgb(0,130,155)"&gt;**plot the two together**&lt;/span&gt;
+
+* Join both datasets, plot bike stations by London neighborhood
+
+* Aggregate datasets, plot London neighborhoods by number of bikes
+
+]
+.pull-right[
+&lt;img src="figs/class03/unnamed-chunk-11-1.png" width="90%" /&gt;
+
+]
+
+---
+counter: false
+
+# Hands-on: your turn! (2/2)
+
+.pull-left[
+* Combine `lnd` (Great London) and `cycle_hire` (location of bike stations)
+
+* Filter London regions with bike stations, plot the two together
+
+* Join both datasets, &lt;span style="color: rgb(0,130,155)"&gt;**plot bike stations by neighborhood**&lt;/span&gt;
+
+* Aggregate datasets, plot London neighborhoods by number of bikes
+
+]
+.pull-right[
+&lt;img src="figs/class03/unnamed-chunk-12-1.png" width="120%" /&gt;
+
+]
+
+---
+counter: false
+
+# Hands-on: your turn! (2/2)
+
+.pull-left[
+* Combine `lnd` (Great London) and `cycle_hire` (location of bike stations)
+
+* Filter London regions with bike stations, plot the two together
+
+* Join both datasets, plot bike stations by London neighborhood
+
+* Aggregate datasets, plot &lt;span style="color: rgb(0,130,155)"&gt;**London neighborhoods by number of bikes**&lt;/span&gt;
+
+]
+.pull-right[
+&lt;img src="figs/class03/unnamed-chunk-13-1.png" width="90%" /&gt;
+
+]
+
+---
+class: center, middle
+
+
+# Your turn: Take-home
+
+# Assignment
+
+---
+
+# Take-home assignment (1/2)
+
+- **Main task:** replicate maps in academic publications/working papers in economics
+
+- **Idea:** put in practice the `sf` tools to work with vector data
+
+- **Delivery:** one `PDF` (R notebook) featuring your code, comments, and the output
+
+  - &lt;g&gt;**Hint:**&lt;/g&gt; use R markdown to create a code notebook!
+  
+  - Example &lt;u&gt;[here](https://web.vu.lt/mif/a.buteikis/wp-content/uploads/2018/01/R_Notebook_example.html)&lt;/u&gt; (this is an `HTML` example, your assignment must be in `PDF`!)
+
+  - Basics/tutorial &lt;u&gt;[here](https://bookdown.org/yihui/rmarkdown/basics.html)&lt;/u&gt; and &lt;u&gt;[here](https://bookdown.org/yihui/rmarkdown-cookbook/hide-one.html)&lt;/u&gt;
+  
+- **Deadline:** until next class (27-28 January 2026 11:59 pm) &lt;y&gt;**Google Classroom**&lt;/y&gt;
+
+---
+
+# Take-home assignment (2/2)
+
+**Instructions:** search for, download, and reproduce the maps of the following papers:
+
+1. Mettetal, E., 2019. *Irrigation dams, water and infant mortality: Evidence from South Africa* (**fig. 2:** hydro dams in South Africa)
+
+2. Fried, S. and Lagakos, D., 2021. *Rural electrification, migration and structural transformation: Evidence from Ethiopia* (**fig. 4:** districts and electricity grid in Ethiopia)
+  
+3. Pellegrina, H.S. and Sotelo, S., 2025. *Migration, Specialization, and Trade: Evidence from Brazil's March to the West* (**fig. 2:** Population in Brazil's meso-regions (or districts) in different periods
+  
+4. Balboni, C.A., 2021. *In harm's way? infrastructure investments and the persistence of coastal cities*. Link &lt;u&gt;[here](https://economics.mit.edu/sites/default/files/publications/Catastrophe_Risk_and_Settlement_Location.pdf)&lt;/u&gt; (**fig. 3:** Vietnam's road infrastructure by road type - if available)
+  
+5. Morten, M. &amp; Oliveira, J., 2024 *The Effects of Roads on Trade and Migration: Evidence from a Planned Capital City* (**fig. 1:** Brazil's capital and main road infrastructure)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
